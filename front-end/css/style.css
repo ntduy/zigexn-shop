@@ -1,0 +1,23 @@
+#wrapper{
+  width:100%;
+  margin:0;
+  padding:0;
+}
+.wrapped {
+  width: 100%;
+}
+.container {
+  padding:0 20px 0 20px;
+  position:relative;
+}
+
+.floatright {
+  float: right;
+}
+
+.inline {
+  display: inline;
+}
+.cart{
+  color:white;
+}
