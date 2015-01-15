@@ -1,23 +1,83 @@
-#wrapper{
-  width:100%;
-  margin:0;
-  padding:0;
-}
-.wrapped {
-  width: 100%;
-}
-.container {
-  padding:0 20px 0 20px;
-  position:relative;
+.main-header {
+	background-color: black;
 }
 
-.floatright {
-  float: right;
+.carousel-caption {
+	font-size: 40px;
+	font-family: Courier;
+	color: red;
+	font-style: bold;
 }
 
-.inline {
-  display: inline;
+.margintop5 {
+	margin-top: 5px;
 }
-.cart{
-  color:white;
+
+.margintop10 {
+	margin-top: 10px;
+}
+
+.margintop20 {
+	margin-top: 20px;
+}
+
+.margintop30 {
+	margin-top: 30px;
+}
+
+.margintop40 {
+	margin-top: 40px;
+}
+
+.marginbottom5 {
+	margin-bottom: 5px;
+}
+
+.marginbottom10 {
+	margin-bottom: 10px;
+}
+
+.marginbottom20 {
+	margin-bottom: 20px;
+}
+
+.marginbottom30 {
+	margin-bottom: 30px;
+}
+
+.marginbottom40 {
+	margin-bottom: 40px;
+}
+
+.buttoncolor {
+	background-color: #F74648;
+}
+ .price {
+ 	font-size: 25px;
+ }
+
+ .gifts {
+ 	width: 50%;
+ }
+
+ .nodecoration
+ {
+ 	text-decoration: none;
+ }
+
+.menu {
+	background-color: white;
+}
+
+nav div div ul li{
+	width: 12%;
+	text-align: center;
+}
+
+ol.carousel-indicators {
+	left: 150px;
+}
+
+ol.carousel-indicators li.active {
+	background-color: #7D7D7D;
 }
