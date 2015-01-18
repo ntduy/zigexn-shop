@@ -81,3 +81,7 @@ ol.carousel-indicators {
 ol.carousel-indicators li.active {
 	background-color: #7D7D7D;
 }
+
+.cartdetails {
+	display: block;
+}
