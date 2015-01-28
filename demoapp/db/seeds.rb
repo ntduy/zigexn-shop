@@ -25,3 +25,10 @@ User.create!(name:  "ntduy",
 		activated: true,
 		activated_at: Time.zone.now)
 end
+
+users = User.order(:created_at).take(5)
+15.times do |n|
+  content = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. ----- #{n+1}"
+  users.each { |user| user.microposts.create!(content: content) }
+end

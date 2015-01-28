@@ -1,19 +1,18 @@
 class UsersController < ApplicationController
-	before_action :logged_in, only: [:index, :edit, :update]
+	before_action :logged_in_user, only: [:index, :edit, :update]
 	before_action :correct_user, only: [:edit, :update]
 	before_action :admin_user, only: :destroy
 
   # GET /users
   # GET /users.json
   def index
-  	# @users = User.all
   	@users = User.paginate(page: params[:page]).per_page(5)
+
   end
 
-  # GET /users/1
-  # GET /users/1.json
   def show
   	@user = User.find(params[:id])
+       @microposts = @user.microposts.paginate(page: params[:page]).per_page(5)
   end
 
   # GET /users/new
@@ -63,13 +62,6 @@ class UsersController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def logged_in
-    	unless logged_in?
-    		store_location
-    		flash[:danger] = "Please log in"
-    		redirect_to login_url
-    	end
-    end
 
     def correct_user
     	@user = User.find(params[:id])
