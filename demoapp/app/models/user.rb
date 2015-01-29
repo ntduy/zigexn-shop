@@ -1,9 +1,15 @@
 class User < ActiveRecord::Base
 	has_many :microposts, dependent: :destroy
+	has_many :active_relationships, class_name: "Relationship",foreign_key: "follower_id", dependent: :destroy
+	has_many :following, through: :active_relationships, source: :followed
+
+	has_many :passive_relationships, class_name: "Relationship",foreign_key: "followed_id", dependent: :destroy
+	has_many :followers, through: :passive_relationships, source: :follower
+
 	before_save :downcase_email
 	before_create :create_activation_digest
+
 	attr_accessor :remember_token, :activation_token, :reset_token
-	has_many :microposts
 	validates :name, length: {maximum: 20}, presence: true
 
 	VALID_EMAIL_REGEX = /\A[\w+\-.+\d]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -30,7 +36,7 @@ class User < ActiveRecord::Base
 	def authenticated?(attribute, token)
 		digest = self.send("#{attribute}_digest")
 		return false if digest.nil?
-		BCrypt::Password.new(remember_digest).is_password?(remember_token)
+		BCrypt::Password.new(digest).is_password?(token)
 	end
 
 	def forget
@@ -38,12 +44,12 @@ class User < ActiveRecord::Base
 	end
 
 	def activate
-		update_attribute(:activated,    true)
+		update_attribute(:activated, true)
 		update_attribute(:activated_at, Time.zone.now)
 	end
 
 	def send_activation_email
-		UserMailer.account_activation(self).deliver_now
+		 UserMailer.account_activation(self).deliver_now
 	end
 
 	def create_reset_digest
@@ -61,8 +67,24 @@ class User < ActiveRecord::Base
 	end
 	
 	def feed
-		Micropost.where("user_id = ?", id)
+		following_ids = "SELECT followed_id FROM relationships
+		WHERE  follower_id = :user_id"
+		Micropost.where("user_id IN (#{following_ids})
+			OR user_id = :user_id", user_id: id)
 	end
+
+	def follow(other_user)
+		active_relationships.create(followed_id: other_user.id)
+	end
+
+	def unfollow(other_user)
+		active_relationships.find_by(followed_id: other_user.id).destroy
+	end
+
+	def following?(other_user)
+		following.include?(other_user)
+	end
+
 	private
 	def downcase_email
 		self.email = email.downcase
