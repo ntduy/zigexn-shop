@@ -1,0 +1,117 @@
+
+.main-header {
+	background-color: black;
+}
+
+.carousel-caption {
+	font-size: 40px;
+	font-family: Courier;
+	color: red;
+	font-style: bold;
+}
+
+.margintop5 {
+	margin-top: 5px;
+}
+
+.margintop10 {
+	margin-top: 10px;
+}
+
+.margintop20 {
+	margin-top: 20px;
+}
+
+.margintop30 {
+	margin-top: 30px;
+}
+
+.margintop40 {
+	margin-top: 40px;
+}
+
+.marginbottom5 {
+	margin-bottom: 5px;
+}
+
+.marginbottom10 {
+	margin-bottom: 10px;
+}
+
+.marginbottom20 {
+	margin-bottom: 20px;
+}
+
+.marginbottom30 {
+	margin-bottom: 30px;
+}
+
+.marginbottom40 {
+	margin-bottom: 40px;
+}
+
+.buttoncolor {
+	background-color: #F74648;
+}
+.price {
+	font-size: 25px;
+}
+
+.gifts {
+	width: 50%;
+}
+
+.nodecoration
+{
+	text-decoration: none;
+}
+
+.menu {
+	background-color: white;
+}
+
+nav div div ul li{
+	width: 12%;
+	text-align: center;
+}
+
+ol.carousel-indicators {
+	left: 150px;
+}
+
+ol.carousel-indicators li.active {
+	background-color: #7D7D7D;
+}
+
+.cartdetails {
+	display: block;
+}
+
+.quickview {
+	z-index: 10;
+	position: absolute;
+	top: 22%;
+	left: 35%;
+	display: none;
+}
+
+.image-product {
+	z-index: 5;
+}
+
+.table-cart{
+	background-color: #484848;
+	display: none;
+	position: absolute;
+	right: 0;
+	z-index: 20;
+	clear:both;
+}
+
+table tr td {
+	padding: 10px 5px 10px 5px;
+}
+
+.wrapper {
+	width: 100%;
+}

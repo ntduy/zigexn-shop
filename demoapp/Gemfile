@@ -13,6 +13,14 @@ gem 'thin'
 gem 'unicorn'
 
 gem 'bcrypt'
+
+gem 'will_paginate'
+
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'fog'
+
+gem 'bootstrap-will_paginate'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
