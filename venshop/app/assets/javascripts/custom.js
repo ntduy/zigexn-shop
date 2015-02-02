@@ -1,4 +1,4 @@
-$(document).ready(function () {
+var ready = function () {
 	var menu = $('.menu');
 	var origOffsetY = menu.offset().top;
 
@@ -12,7 +12,7 @@ $(document).ready(function () {
 	document.onscroll = scroll;
 
 	$(".product-item").hover(function() {
-		$(".quickview",this).show( 100 );
+		$(".quickview",this).show( 200 );
 	});
 
 	$(".product-item").mouseleave(function() {
@@ -24,6 +24,13 @@ $(document).ready(function () {
 	});
 
 	$(".table-cart").mouseleave(function() {
-		$(".table-cart").hide( 500 );
+		$(".table-cart").hide( 300 );
 	});
-});
+
+	// $(".cart").mouseleave(function() {
+	// 	$(".table-cart").hide( 300 );
+	// });
+};
+
+$(document).ready(ready);
+$(document).on('page:load', ready);

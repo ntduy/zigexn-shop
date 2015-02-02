@@ -2,20 +2,43 @@
 	<div class="main-header">
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-4 pull-left margintop10 marginbottom10">
-					<div class="logo">
-						<a href="#"><%= image_tag("logo.jpg") %></a>
-					</div>
+				<div class="col-md-3 pull-left margintop10 marginbottom10">
+					<%=link_to image_tag("logo.jpg"),root_path %>
+					
 				</div>
+				<div class="input-group pull-left col-md-4 margintop10 marginbottom10">
+					<input type="text" class="form-control" placeholder="Search for...">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+					</span>
+				</div>
+				
 				<div class="col-sm-4 pull-right margintop10">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search for...">
-						<span class="input-group-btn">
-							<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-						</span>
-					</div><!-- /input-group -->
-
-					<div class="cart margintop10 pull-right">
+					<nav>
+						<ul class="nav navbar-nav">
+							<li><%= link_to "Sign Up", signup_path %></li>
+							<% if logged_in? %>
+							<% if current_user.admin?%>
+							<li><%= link_to "Users", users_path %></li>
+							<% end %>
+							
+							<li class="dropdown">
+								<a class="dropdown-tggle" data-toggle="dropdown">Account <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><%= link_to "Profile", current_user %></li>
+									<li><%= link_to "Settings", edit_user_path(current_user) %></li>
+									<li class="devider"></li>
+									<li>
+										<%= link_to "Log out", logout_path, method: "delete" %>
+									</li>
+								</ul>
+							</li>
+							<% else %>
+							<li><%= link_to "Log in", login_path %></li>
+							<% end %>
+						</ul>
+					</nav>
+					<div class="cart margintop30 pull-right">
 						<div class="cart-w">
 							<div class="cart-info">
 								<span>
@@ -34,45 +57,7 @@
 		</div>
 	</div>
 	<!-- end main-header -->
-	<div class="container">
-		<div class="row" style="position: relative">
-			<div class="col-md-3 col-sm-4 col-xs-4 col-lg-3 table-cart">
-				<table>
-					<tr>
-						<td>
-							<div class="row">
-								<div class="col-lg-4 col-sm-4 col-xs-4 col-lg-3">
-									<img class="img-responsive image-product" src="assets/img/product/3.jpg" alt="">
-								</div>
-								<div class="col-lg-8">
-									<span style="color:white">2 x Beach ...</span>
-									<a href="#" title=""><span class="glyphicon glyphicon-remove pull-right" style="color:white"></span><br></a>
-									<strong style="color:white">$12</strong>
-								</div>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<span style="color:white">Shipping</span>
-							<strong style="color:white;">$12</strong><br>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<span style="color:white">Total</span>
-							<strong style="color:white">$36</strong><br>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<button class="btn btn-danger">Check Out</button>
-						</td>
-					</tr>
-				</table>
-			</div>
-		</div>
-	</div>
+	<%= render 'layouts/cartquickview'%>
 	<!-- navbar-fixed-top -->
 	<nav class="navbar navbar-default">
 		<div class="container menu">
