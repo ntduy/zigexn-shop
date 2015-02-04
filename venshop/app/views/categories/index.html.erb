@@ -1,0 +1,7 @@
+<% if @categories.any? %>
+<div>
+	<%=link_to 'new category', new_category_path%>
+	<hr>
+	<%= render @categories %>
+</div>
+<% end %>

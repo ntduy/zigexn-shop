@@ -30,15 +30,12 @@ ActiveRecord::Schema.define(version: 20150203075659) do
   end
 
   create_table "products", force: :cascade do |t|
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.string   "name"
     t.string   "image_url"
-    t.string   "status"
     t.string   "description"
-    t.integer  "amount"
-    t.string   "currencycode"
-    t.string   "formattedprice"
+    t.float    "price"
   end
 
   create_table "users", force: :cascade do |t|

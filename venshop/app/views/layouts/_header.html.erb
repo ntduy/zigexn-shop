@@ -1,6 +1,7 @@
 <header>
-	<div class="main-header">
-		<div class="container">
+	
+	<div class="container">
+		<div class="main-header">
 			<div class="row">
 				<div class="col-md-3 pull-left margintop10 marginbottom10">
 					<%=link_to image_tag("logo.jpg"),root_path %>
@@ -19,7 +20,14 @@
 							<li><%= link_to "Sign Up", signup_path %></li>
 							<% if logged_in? %>
 							<% if current_user.admin?%>
-							<li><%= link_to "Users", users_path %></li>
+							<li class="dropdown">
+								<a class="dropdown-tggle" data-toggle="dropdown">Management <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><%= link_to "Users", users_path %></li>
+									<li><%= link_to "Products", products_path %></li>
+									<li><%= link_to "Categories", categories_path %></li>
+								</ul>
+							</li>
 							<% end %>
 							
 							<li class="dropdown">
@@ -46,7 +54,6 @@
 										<i class="glyphicon glyphicon-shopping-cart"></i>
 										<strong>CART</strong>
 										<span>2 products</span>
-										<span class="caret"></span>
 									</a>
 								</span>
 							</div>
@@ -55,24 +62,16 @@
 				</div>
 			</div>
 		</div>
+		<div class="margintop10 marginbottom10">
+		<table class="table-category">
+			<tr>
+				<% category.each do |cate| %>
+				<td class="text-center category"><%= link_to cate.name, category_path(cate) %></td> 
+				<% end %>
+			</tr>
+		</table>
+	</div>
 	</div>
 	<!-- end main-header -->
-	<%= render 'layouts/cartquickview'%>
 	<!-- navbar-fixed-top -->
-	<nav class="navbar navbar-default">
-		<div class="container menu">
-			<div class="main-nav margintop10 marginbottom10">
-				<ul class="nav nav-pills">
-					<li role="presentation" class="active"><a href="#">NEW</a></li>
-					<li role="presentation"><a href="#">BRIDE</a></li>
-					<li role="presentation"><a href="#">SHIRT</a></li>
-					<li role="presentation"><a href="#">JEWELRY</a></li>
-					<li role="presentation"><a href="#">BRIDAL PARTY &amp; GUESTS</a></li>
-					<li role="presentation"><a href="#">SHOES &amp; ACCESORIES</a></li>
-					<li role="presentation"><a href="#">LINGERIE</a></li>
-					<li role="presentation"><a href="#">SALE</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
 </header>

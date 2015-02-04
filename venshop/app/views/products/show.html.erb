@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<% provide(:title, @product.name) %>
+<div class="row">
+	<div class="col-lg-6">
+		<%= image_tag(@product.image_url,class:"img-responsive")%>
+	</div>
+	<div class="col-lg-6">
+		<h4><%= @product.name %></h4>
+		<span>
+			<%= @product.description%>
+		</span>
+		<div class="pull-left margintop10 marginbottom10">
+			<strong class="price">$ <%= @product.price %></strong>
+		</div>
+		<br><br><br>
+		<hr>
+		<%= link_to 'back', products_path %>
+		| <%= link_to "edit", edit_product_path(@product) %>
+		| <%= link_to "delete", @product, method: :delete, data: {confirm: "you sure?"} %>
+	</div>
+</div>
+

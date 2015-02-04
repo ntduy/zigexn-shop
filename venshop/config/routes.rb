@@ -1,16 +1,17 @@
 Rails.application.routes.draw do
 
-  get 'products/index'
-
+  root 'homes#index'
   get 'signup'  => 'users#new'
   get 'login' => 'sessions#new'
   post 'login'  => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
   resources :users
 
-  root 'homes#index'
+  
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
+  resources :products
+  resources :categories
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

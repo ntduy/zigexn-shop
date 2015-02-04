@@ -1,36 +1,9 @@
 <% if @products.any? %>
-<% @products.each do |product| %>
 <div class="product-lists">
-	<div class="row">
-		<%4.times do %>
-		<div class="col-sm-6 col-lg-3 margintop40">
-			<div class="product-item">
-				<button class="btn btn-default quickview">Quick view</button>
-
-				<%= image_tag(product.image_url,class:"img-responsive image-product")%>
-			</div>
-
-			<div class="tittle text-center">
-				<h4><%= product.name %></h4>
-			</div>
-
-			<div class="item-description text-center">
-				<span>
-					<%= product.description%>
-				</span>
-			</div>
-			<div class="line"></div>
-			<div class="info">
-				<div class="pull-left margintop10 marginbottom10">
-					<strong class="price"><%= product.formattedprice %></strong>
-				</div>
-				<div class="pull-right">
-					<button type="button" class="btn btn-default buttoncolor margintop10 marginbottom10">add to cart</button>
-				</div>
-			</div>
-		</div>
-		<%end%>
-	</div>
+	
+	<%=link_to 'new product', new_product_path%>
+	<hr>
+	<%= render @products%>
+	<%= will_paginate %>
 </div>
-<% end %>
 <% end %>

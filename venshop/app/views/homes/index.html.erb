@@ -1,50 +1,49 @@
-<section class="slider">
-	<div class="container">
-		<div id="slidedemo" class="carousel slide" data-ride="carousel">
-			<!-- Indicators -->
-			<ol class="carousel-indicators">
-				<li data-target="#slidedemo" data-slide-to="0" class="active"></li>
-				<li data-target="#slidedemo" data-slide-to="1"></li>
-				<li data-target="#slidedemo" data-slide-to="2"></li>
-			</ol>
 
-			<!-- Wrapper for slides -->
-			<div class="carousel-inner" role="listbox">
-				<div class="item active">
-					<%= image_tag("slider1.jpg")%>
-					<div class="carousel-caption">
-						NEW 2014 Colection
-					</div>
-				</div>
-				<div class="item">
-					<%= image_tag("slider2.jpg")%>
-					<div class="carousel-caption">
-						Create your style
-					</div>
-				</div>
-				<div class="item">
-					<%= image_tag("slider3.jpg")%>
-					<div class="carousel-caption">
-						New arrivals from top brands
-					</div>
+<section class="slider">	
+	<div id="slidedemo" class="carousel slide" data-ride="carousel">
+		<!-- Indicators -->
+		<ol class="carousel-indicators">
+			<li data-target="#slidedemo" data-slide-to="0" class="active"></li>
+			<li data-target="#slidedemo" data-slide-to="1"></li>
+			<li data-target="#slidedemo" data-slide-to="2"></li>
+		</ol>
+
+		<!-- Wrapper for slides -->
+		<div class="carousel-inner" role="listbox">
+			<div class="item active">
+				<%= image_tag("slider1.jpg")%>
+				<div class="carousel-caption">
+					NEW 2015 Colection
 				</div>
 			</div>
-
-			<!-- Controls -->
-			<a class="left carousel-control" href="#slidedemo" role="button" data-slide="prev">
-				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-				<span class="sr-only">Previous</span>
-			</a>
-			<a class="right carousel-control" href="#slidedemo" role="button" data-slide="next">
-				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-				<span class="sr-only">Next</span>
-			</a>
+			<div class="item">
+				<%= image_tag("slider2.jpg")%>
+				<div class="carousel-caption">
+					Create your style
+				</div>
+			</div>
+			<div class="item">
+				<%= image_tag("slider3.jpg")%>
+				<div class="carousel-caption">
+					New arrivals from top brands
+				</div>
+			</div>
 		</div>
+
+		<!-- Controls -->
+		<a class="left carousel-control" href="#slidedemo" role="button" data-slide="prev">
+			<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+			<span class="sr-only">Previous</span>
+		</a>
+		<a class="right carousel-control" href="#slidedemo" role="button" data-slide="next">
+			<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
+		</a>
 	</div>
 </section>
 
 <section class="content">
-	<div class="container margintop40">
+	<div class="margintop40">
 		<div role="tabpanel">
 			<!-- Nav tabs -->
 			<ul class="nav nav-tabs" role="tablist">
@@ -56,88 +55,67 @@
 			<!-- Tab panes -->
 			<div class="tab-content">
 				<div role="tabpanel" class="tab-pane active" id="NEW-ARRIVALS">
+					<% if @products.any? %>
 					<div class="product-lists">
 						<div class="row">
+							<%for i in 1..4 do%>
 							<div class="col-sm-6 col-lg-3 margintop40">
-								<div class="product-item">
-									<button class="btn btn-default quickview">Quick view</button>
-									<%=image_tag("product/1.jpg", class:"img-responsive image-product")%>
-								</div>
-
-								<div class="tittle text-center">
-									<h2>Tittle</h2>
-								</div>
-
-								<div class="item-description text-center">
-									<span>
-										When you ask a woman about the most memorable days of her life, she will...
-									</span>
-								</div>
-								<div class="line"></div>
-								<div class="info">
-									<div class="pull-left margintop10 marginbottom10">
-										<strong class="price">$1795.15</strong>
-									</div>
-									<div class="pull-right">
-										<button type="button" class="btn btn-default buttoncolor margintop10 marginbottom10">add to cart</button>
-									</div>
-								</div>
+								<% for j in (3*i-2)..(i*3) do  %>
+									<% if !@products[j-1].nil? %>
+										<%= render 'products/product', product: @products[j-1]%>
+									<% end %>
+								<% end %>
 							</div>
-
+							<% end %>
 						</div>
+						<%= will_paginate @products%>
 					</div>
-					<!-- end product-list -->
+					<% end %>
 				</div>
 				<div role="tabpanel" class="tab-pane" id="POPULAR">
-					<div class="product-lists">
-						<div class="row">
-							
-						</div>
-					</div>
-
-					<div role="tabpanel" class="tab-pane" id="BEST-SELLERS">
-						<div class="product-lists">
-
-						</div>
-					</div>
+					
+				</div>
+				<div role="tabpanel" class="tab-pane" id="BEST-SELLERS">
+					
 				</div>
 			</div>
 		</div>
-		<!-- end product list -->
-		<div class="container margintop40">
-			<div class="row">
-				<div class="col-lg-4 col-sm-6 col-xs-12">
-					<h3>FOLLOW US ON FACEBOOK</h3>
-					<iframe src="http://www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FFacebookDevelopers&amp;width&amp;height=258&amp;colorscheme=light&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=true" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:258px;" allowTransparency="true"></iframe>
+	</div>
+	<!-- end product list -->
+	<div class="margintop40">
+		<div class="row">
+			<div class="col-lg-4 col-sm-6 col-xs-12">
+				<h3>FOLLOW US ON FACEBOOK</h3>
+				<iframe src="http://www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FFacebookDevelopers&amp;width&amp;height=258&amp;colorscheme=light&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=true" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:258px;" allowTransparency="true"></iframe>
 
-				</div>
-				<div class="col-lg-4 col-sm-4 col-xs-12">
-					<h3>ORIGINAL GIFTS</h3>
-					<div class="margintop10">
-						<div class="pull-left wrapper">
-							<a href="">
-								<%=image_tag("product/gifts.png", class: "pull-left img-responsive gifts")%>
-							</a>
-							<p class="text-center margintop20"><strong>Morbi nunc odio</strong></p>
-							<p class="text-center">Something's right here. Original gifts details</p>
-						</div>
-						<button class="btn btn-default buttoncolor">more info</button>
+			</div>
+			<div class="col-lg-4 col-sm-4 col-xs-12">
+				<h3>ORIGINAL GIFTS</h3>
+				<div class="margintop10">
+					<div class="pull-left wrapper">
+						<a href="">
+							<%=image_tag("product/gifts.png", class: "pull-left img-responsive gifts")%>
+						</a>
+						<p class="text-center margintop20"><strong>Morbi nunc odio</strong></p>
+						<p class="text-center">Something's right here. Original gifts details</p>
 					</div>
+					<button class="btn btn-default buttoncolor">more info</button>
 				</div>
+			</div>
 
-				<div class="col-lg-4 col-sm-4 col-xs-12">
-					<h3>Special offers</h3>
-					<div class="margintop10">
-						<div class="pull-left wrapper">
-							<a href="#">
-								<%=image_tag("product/offer.png", class: "pull-left img-responsive gifts")%>
-							</a>
-							<p class="text-center margintop20"><strong>Morbi nunc odio</strong></p>
-							<p class="text-center">Something's right here. Original gifts details</p>
-						</div>
-						<button class="btn btn-default buttoncolor">more info</button>
+			<div class="col-lg-4 col-sm-4 col-xs-12">
+				<h3>Special offers</h3>
+				<div class="margintop10">
+					<div class="pull-left wrapper">
+						<a href="#">
+							<%=image_tag("product/offer.png", class: "pull-left img-responsive gifts")%>
+						</a>
+						<p class="text-center margintop20"><strong>Morbi nunc odio</strong></p>
+						<p class="text-center">Something's right here. Original gifts details</p>
 					</div>
+					<button class="btn btn-default buttoncolor">more info</button>
 				</div>
 			</div>
 		</div>
-	</section>
+	</div>
+</section>

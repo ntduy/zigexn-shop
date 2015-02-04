@@ -1,0 +1,34 @@
+<% if !current_user.nil?&&current_user.admin?%>
+<div>
+	<%= image_tag(product.image_url,style: "height: 100px; width:100px;")%>
+	<div class="col-lg-9">
+		<h4><%= product.name %></h4>
+		| <%= link_to "show", product %>
+		| <%= link_to "edit", edit_product_path(product) %>
+		| <%= link_to "delete", product, method: :delete, data: {confirm: "you sure?"} %>
+	</div>
+</div>
+<%else%>
+<div class="product-item">
+	<%= image_tag(product.image_url,class:"img-responsive")%>
+	<div class="tittle text-center">
+		<h4><%= product.name %></h4>
+	</div>
+	<hr>
+	<div class="item-description text-center">
+		<span>
+			<%= product.description%>
+		</span>
+	</div>
+	<hr>
+	<div class="info">
+		<div class="pull-left margintop10 marginbottom10">
+			<strong class="price">$ <%= product.price %></strong>
+		</div>
+		<div class="pull-right">
+			<button type="button" class="btn btn-default buttoncolor margintop10 marginbottom10">add to cart</button>
+		</div>
+	</div><br><br>
+	<hr>
+</div>
+<% end %>

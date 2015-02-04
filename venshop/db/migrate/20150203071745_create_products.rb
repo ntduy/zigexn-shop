@@ -4,11 +4,8 @@ class CreateProducts < ActiveRecord::Migration
       t.timestamps null: false
       t.string :name
       t.string :image_url
-      t.string :status
       t.string :description
-      t.integer :amount
-      t.string :currencycode
-      t.string :formattedprice
+      t.float :price
     end
   end
 end

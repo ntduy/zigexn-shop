@@ -1,0 +1,16 @@
+<% if @products.any? %>
+<div class="product-lists">
+	<div class="row">
+		<%for i in 1..4 do%>
+		<div class="col-sm-6 col-lg-3 margintop40">
+			<% for j in (3*i-2)..(i*3) do  %>
+			<% if !@products[j-1].nil? %>
+			<%= render 'products/product', product: @products[j-1]%>
+			<% end %>
+			<% end %>
+		</div>
+		<% end %>
+	</div>
+	<%= will_paginate @products%>
+</div>
+<% end %>

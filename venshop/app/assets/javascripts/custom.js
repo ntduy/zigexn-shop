@@ -10,26 +10,6 @@ var ready = function () {
 		}
 	}
 	document.onscroll = scroll;
-
-	$(".product-item").hover(function() {
-		$(".quickview",this).show( 200 );
-	});
-
-	$(".product-item").mouseleave(function() {
-		$(".quickview",this).hide( 100 );
-	});
-
-	$(".cart").hover(function() {
-		$(".table-cart").show( 500 );
-	});
-
-	$(".table-cart").mouseleave(function() {
-		$(".table-cart").hide( 300 );
-	});
-
-	// $(".cart").mouseleave(function() {
-	// 	$(".table-cart").hide( 300 );
-	// });
 };
 
 $(document).ready(ready);
