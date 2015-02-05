@@ -49,12 +49,12 @@
 						<div class="cart-w">
 							<div class="cart-info">
 								<span>
-									<a href="#" class="btn-cart">
-										<i class="glyphicon glyphicon-shopping-cart"></i>
+									<%= link_to new_cart_path do %>
+									<i class="glyphicon glyphicon-shopping-cart"></i>
 										<strong>CART</strong>
-										<span id="numofproducts">2</span>
+										<span><!-- cart_ss[:items].coun --></span>
 										<span>Products</span>
-									</a>
+									<% end %>
 								</span>
 							</div>
 						</div>

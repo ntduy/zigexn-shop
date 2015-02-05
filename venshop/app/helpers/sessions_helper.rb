@@ -1,15 +1,9 @@
 module SessionsHelper
-	
-		# if logged_in?
-		# 		session[:cart][:user_id] = current_user.id
-		# 	else
-		# 		session[:cart][:user_id] = 0
-		# 	end
 
-	def create_cart
+	def cart_ss
 		if session[:cart].nil?
 			session[:cart] = {}
-			session[:cart][:items] = Array.new	
+			session[:cart][:items] = []
 		else
 			session[:cart].deep_symbolize_keys!
 		end
@@ -25,7 +19,7 @@ module SessionsHelper
 	end
 
 	def add_to_cart(product_id)
-		create_cart
+		cart_ss
 		if product_in_cart?(product_id)
 			product_in_cart?(product_id)[:quantity] += 1
 		else
@@ -33,6 +27,11 @@ module SessionsHelper
 		end
 	end
 
+	def delete_cart_ss
+		session.delete(:cart)
+	end
+
+# ==========================================
 	def log_in(user)
 		session[:user_id] = user.id
 		create_cart

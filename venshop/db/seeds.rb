@@ -37,8 +37,7 @@ request.configure(
 	associate_tag: 'tag'
 	)
 
-Cate
-gories = ["Baby","Beauty","Books"]
+Categories = ["Baby","Beauty","Books"]
 Categories.each do |category|
 	cate = Category.create!(name: category)
 	for i in 1..3 do

@@ -1,7 +1,7 @@
 module ApplicationHelper
 
 	def category
-		@category = Category.all
+		Category.all
 	end
 	
 	def full_title(page_title = '')

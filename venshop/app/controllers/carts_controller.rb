@@ -1,69 +1,55 @@
 class CartsController < ApplicationController
-  # GET /carts
-  # GET /carts.json
-  def index
-    @carts = Cart.all
-  end
+	before_action :logged_in_user, only: [:index, :show]
+	def index
+		@carts = Cart.all
+	end
 
-  # GET /carts/1
-  # GET /carts/1.json
-  def show
-    
-  end
+	def show
 
-  # GET /carts/new
-  def new
-    @cart = Cart.new
-  end
+	end
 
-  # GET /carts/1/edit
-  def edit
-  end
+	def new
+		@items = []
+		cart_ss[:items].each do |item|
+			@items << {product: Product.find(item[:product_id]),quantity: item[:quantity]}
+		end
 
-  # POST /carts
-  # POST /carts.json
-  def create
-    @cart = Cart.new(cart_params)
+		@cart = Cart.new
+		if logged_in?
+			@cart.user_id = current_user.id
+			@cart.name    = current_user.name
+			@cart.email   = current_user.email
+			@cart.address = current_user.address
+			@cart.phone   = current_user.phone
+		else
+			@cart.user_id = 0
+		end
+	end
 
-    respond_to do |format|
-      if @cart.save
-        format.html { redirect_to @cart, notice: 'Cart was successfully created.' }
-        format.json { render :show, status: :created, location: @cart }
-      else
-        format.html { render :new }
-        format.json { render json: @cart.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+	def create
+		@cart = Cart.new(cart_params)
+		@cart.status = "being shipped"
+		if logged_in?
+			@cart.user_id = current_user.id
+		else
+			@cart.user_id = 0
+		end
+		if @cart.save
+			cart_ss[:items].each do |item|
+				CartDetail.create!(cart_id: @cart.id, product_id: item[:product_id], quantity: item[:quantity])
+			end
+			delete_cart_ss
+			flash[:success] = "You will be recevie them soon!"
+			redirect_to root_path
+		else
+			flash[:danger] = "failed"
+			render 'new'
+		end
+	end
 
-  # PATCH/PUT /carts/1
-  # PATCH/PUT /carts/1.json
-  def update
-    respond_to do |format|
-      if @cart.update(cart_params)
-        format.html { redirect_to @cart, notice: 'Cart was successfully updated.' }
-        format.json { render :show, status: :ok, location: @cart }
-      else
-        format.html { render :edit }
-        format.json { render json: @cart.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
-  # DELETE /carts/1
-  # DELETE /carts/1.json
-  def destroy
-    @cart.destroy
-    respond_to do |format|
-      format.html { redirect_to carts_url, notice: 'Cart was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def cart_params
-      params.require(:cart).permit(:user_id, :status, :name, :email, :address, :phone)
-    end
-  end
+	private
+	def cart_params
+		params.require(:cart).permit(:user_id, :status, :name, :email, :address, :phone)
+	end
+end

@@ -1,4 +1,4 @@
-<%if @items.count >0 %>
+<%= form_tag updatecart_path do %>
 <table style="width: 100%">
 	<thead>
 		<tr>
@@ -20,7 +20,7 @@
 			<td><%=image_tag(item[:product].image_url,class:"img-responsive", style: "height: 100px")%></td>
 
 			<td><%= link_to "#{item[:product].name}",  product_path(item[:product]) %></td>
-			<td><%= text_field_tag :quantity, placeholder = "#{item[:quantity]}", style: "width: 25px;text-align: center;"%></td>
+			<td><%= text_field_tag :quantity, placeholder = "#{item[:quantity]}"%></td>
 			<td><%=item[:product].price%></td>
 			<td><%=item[:quantity]*item[:product].price%></td>
 			<%total+=item[:quantity]*item[:product].price%>
@@ -40,10 +40,9 @@
 	</tbody>
 </table>
 
-<br><br>
-<%= render 'form' %>
+<%= button_tag(type: "submit", class: "btn btn-warning pull-right margintop10") do %>
+Update Cart
+<% end %>
+<% end %>
 
-<%else%>
-<h1>Your cart is empty.</h1>
-<%=link_to "Shopping now", root_path%>
-<%end%>
+<%= link_to "Check out", new_cart_path, class: "btn btn-primary pull-right margintop10" %>
