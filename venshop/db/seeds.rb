@@ -37,10 +37,11 @@ request.configure(
 	associate_tag: 'tag'
 	)
 
-Categories = ["Baby","Beauty","Books"]
+Cate
+gories = ["Baby","Beauty","Books"]
 Categories.each do |category|
 	cate = Category.create!(name: category)
-	for i in 1..2 do
+	for i in 1..3 do
 		params = {
 			'SearchIndex' => category,
 			'Keywords'=> 'birds',

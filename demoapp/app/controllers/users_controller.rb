@@ -31,8 +31,8 @@ class UsersController < ApplicationController
   	@user = User.new(user_params)
   	if @user.save
   		@user.send_activation_email
-              flash[:info] = "Please check your email to activate your account."
-              redirect_to root_url
+      flash[:info] = "Please check your email to activate your account."
+      redirect_to root_url
   		# log_in @user
   		# flash.now[:success] = "Welcome to the Sample App!"
   		# render 'show'
@@ -47,7 +47,7 @@ class UsersController < ApplicationController
   def update
   	@user = User.find(params[:id])
   	if @user.update_attributes(user_params)
-            
+      
   	else
   		render 'edit'
   	end

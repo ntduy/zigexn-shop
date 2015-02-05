@@ -21,6 +21,12 @@ class SessionsController < ApplicationController
 		end
 	end
 
+	def addtocart
+		add_to_cart(params[:product_id])
+		flash[:success] = "Add product to cart successfully"
+		redirect_back_or root_url
+	end
+
 	def destroy
 		log_out if logged_in?
 		redirect_to root_url

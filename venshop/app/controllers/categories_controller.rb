@@ -10,7 +10,7 @@ class CategoriesController < ApplicationController
 	end
 
 	def show
-		@category = Category.find(params[:id])
+		@category = Category.find_by(name: params[:name])
 		@products = @category.products.paginate(page: params[:page]).per_page(12)
 	end
 
@@ -31,8 +31,8 @@ class CategoriesController < ApplicationController
 
 	def update
 		@category = Category.find(params[:id])
-		if @category.update_attributes(user_params)
-			render 'index'
+		if @category.update_attributes(category_params)
+			redirect_to categories_url
 		else
 			render 'edit'
 		end

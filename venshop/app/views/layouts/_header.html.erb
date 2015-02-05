@@ -1,5 +1,4 @@
 <header>
-	
 	<div class="container">
 		<div class="main-header">
 			<div class="row">
@@ -7,11 +6,11 @@
 					<%=link_to image_tag("logo.jpg"),root_path %>
 					
 				</div>
-				<div class="input-group pull-left col-md-4 margintop10 marginbottom10">
-					<input type="text" class="form-control" placeholder="Search for...">
-					<span class="input-group-btn">
-						<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-					</span>
+				<div class="pull-left col-md-4 col-sm-3 col-xs-3 margintop10 marginbottom10">
+					<%= form_tag products_path, method: 'get' do %>
+					<%= text_field_tag(:search, params[:search], style: "width:200px; height: 30px", placeholder: "Search for")%>
+					<%= submit_tag("Search",class: "btn btn-primary") %>
+					<% end %>
 				</div>
 				
 				<div class="col-sm-4 pull-right margintop10">
@@ -53,7 +52,8 @@
 									<a href="#" class="btn-cart">
 										<i class="glyphicon glyphicon-shopping-cart"></i>
 										<strong>CART</strong>
-										<span>2 products</span>
+										<span id="numofproducts">2</span>
+										<span>Products</span>
 									</a>
 								</span>
 							</div>
@@ -63,15 +63,13 @@
 			</div>
 		</div>
 		<div class="margintop10 marginbottom10">
-		<table class="table-category">
-			<tr>
-				<% category.each do |cate| %>
-				<td class="text-center category"><%= link_to cate.name, category_path(cate) %></td> 
-				<% end %>
-			</tr>
-		</table>
+			<table class="table-category">
+				<tr>
+					<% category.each do |cate| %>
+					<td class="text-center category"><%= link_to cate.name,  show_categories_path(cate.name)  %></td> 
+					<% end %>
+				</tr>
+			</table>
+		</div>
 	</div>
-	</div>
-	<!-- end main-header -->
-	<!-- navbar-fixed-top -->
 </header>

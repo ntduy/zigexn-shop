@@ -26,7 +26,11 @@
 			<strong class="price">$ <%= product.price %></strong>
 		</div>
 		<div class="pull-right">
-			<button type="button" class="btn btn-default buttoncolor margintop10 marginbottom10">add to cart</button>
+			<!-- <button type="button" class="btn btn-default buttoncolor margintop10 marginbottom10">add to cart</button> -->
+			<%= form_tag addtocart_path do %>
+			<div><%= hidden_field_tag :product_id, product.id %></div>
+			<%= submit_tag("add to cart",class: "btn btn-primary") %>
+			<% end %>
 		</div>
 	</div><br><br>
 	<hr>
