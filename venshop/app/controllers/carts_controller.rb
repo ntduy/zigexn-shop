@@ -1,8 +1,5 @@
 class CartsController < ApplicationController
-	before_action :logged_in_user, only: [:index, :show]
-	def index
-		@carts = Cart.all
-	end
+	before_action :logged_in_user, only: [:show]
 
 	def show
 

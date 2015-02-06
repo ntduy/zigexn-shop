@@ -1,3 +1,4 @@
 class Cart < ActiveRecord::Base
-	has_many :cart_details
+	has_many :cartdetails
+	has_many :products, through: :cartdetails
 end

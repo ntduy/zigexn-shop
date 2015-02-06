@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @carts = Cart.find_by(user_id: @user.id)
   end
 
   def new

@@ -20,7 +20,7 @@ User.create!(name:  "Admin",
 
 10.times do |n|
 	name  = "testpage-#{n+1}"
-	email = "example-#{n+1}@venshop.org"
+	email = "example-#{n+1}@venshop.com"
 	password = "password"
 	User.create!(name:  name,
 		email: email,

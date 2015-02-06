@@ -9,5 +9,36 @@
 			</h1>
 		</section>
 	</aside>
+	<aside class="col-md-4">
+		<tablle>
+			<thead>
+				<tr>
+					<th>STT</th>
+					<th>Number of products</th>
+					<th>Date</th>
+					<th>Total price</th>
+				</tr>
+			</thead>
+			<tbody>
+			<%i=0%>
+			<%total=0%>
+				<%@carts.each do |cart| %>
+				<tr>
+					<td><%=i+=1%></td>
+					<%=link_to cart_path(cart) do%>
+					<td><%=cart.products.count%> products</td>
+					<%end%>
+					<td><%=cart.create_at%></td>
+					<% cart.products.each do |product|
+						total+= product.price
+					end %>
+					<td><%=$ total%></td>
+				</tr>
+
+				<% end %>
+
+			</tbody>
+		</table>
+	</aside>
 </div>
 
