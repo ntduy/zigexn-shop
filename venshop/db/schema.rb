@@ -24,6 +24,9 @@ ActiveRecord::Schema.define(version: 20150205132230) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "cart_details", ["cart_id"], name: "index_cart_details_on_cart_id", using: :btree
+  add_index "cart_details", ["product_id"], name: "index_cart_details_on_product_id", using: :btree
+
   create_table "carts", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "status"
@@ -56,6 +59,8 @@ ActiveRecord::Schema.define(version: 20150205132230) do
     t.string   "description"
     t.float    "price"
   end
+
+  add_index "products", ["name"], name: "index_products_on_name", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at",                        null: false

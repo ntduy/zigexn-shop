@@ -2,7 +2,7 @@ class CartsController < ApplicationController
 	before_action :logged_in_user, only: [:show]
 
 	def show
-
+		@cart = Cart.find(params[:id])
 	end
 
 	def new

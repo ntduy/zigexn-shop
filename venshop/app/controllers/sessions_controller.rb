@@ -37,12 +37,16 @@ class SessionsController < ApplicationController
 		redirect_to root_url
 	end
 
-	def removefromcart
-		cart_ss[:items].delete(product_in_cart?(params[:product_id]))
-		redirect_to new_cart_path
-	end
-
 	def updatecart
+
+		params[:quantities].each_with_index do |quantity,index|
+			cart_ss[:items][index][:quantity] = quantity.to_i
+		end
+		unless params[:product_indexes].nil?
+			params[:product_indexes].each do |indexfordelete|
+				cart_ss[:items].delete_at(indexfordelete.to_i)
+			end
+		end
 		redirect_to new_cart_path
 	end
 

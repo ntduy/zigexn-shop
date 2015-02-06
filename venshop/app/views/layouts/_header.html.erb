@@ -48,11 +48,12 @@
 					<div class="cart margintop30 pull-right">
 						<div class="cart-w">
 							<div class="cart-info">
+							<%cart_ss%>
 								<span>
 									<%= link_to new_cart_path do %>
 									<i class="glyphicon glyphicon-shopping-cart"></i>
 										<strong>CART</strong>
-										<span><!-- cart_ss[:items].coun --></span>
+										<span><%= cart_ss[:items].count %></span>
 										<span>Products</span>
 									<% end %>
 								</span>

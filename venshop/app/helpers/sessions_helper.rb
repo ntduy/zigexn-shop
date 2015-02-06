@@ -34,8 +34,6 @@ module SessionsHelper
 # ==========================================
 	def log_in(user)
 		session[:user_id] = user.id
-		create_cart
-		session[:cart][:user_id] = current_user.id
 	end
 
 	def remember(user)

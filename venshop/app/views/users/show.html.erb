@@ -10,7 +10,8 @@
 		</section>
 	</aside>
 	<aside class="col-md-4">
-		<tablle>
+		<%if @carts.count >0%>
+		<table>
 			<thead>
 				<tr>
 					<th>STT</th>
@@ -20,25 +21,24 @@
 				</tr>
 			</thead>
 			<tbody>
-			<%i=0%>
-			<%total=0%>
-				<%@carts.each do |cart| %>
+
+				<%total=0%>
+				<%@carts.each_with_index do |cart,index| %>
 				<tr>
-					<td><%=i+=1%></td>
-					<%=link_to cart_path(cart) do%>
-					<td><%=cart.products.count%> products</td>
-					<%end%>
-					<td><%=cart.create_at%></td>
+					<td><%=index+=1%></td>
+					
+					<td><%=link_to "#{cart.products.count} products", cart_path(cart) %></td>
+					
+					<td><%=cart.created_at%></td>
 					<% cart.products.each do |product|
 						total+= product.price
-					end %>
-					<td><%=$ total%></td>
-				</tr>
-
-				<% end %>
-
-			</tbody>
-		</table>
-	</aside>
-</div>
+						end %>
+						<td>$ <%= total %></td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+			<% end %>
+		</aside>
+	</div>
 

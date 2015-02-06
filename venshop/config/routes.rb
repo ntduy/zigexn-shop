@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   post 'login'  => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
   post 'addtocart' => 'sessions#addtocart'
-  post 'removefromcart' => 'sessions#removefromcart'
   post 'updatecart' => 'sessions#updatecart'
 
   resources :users

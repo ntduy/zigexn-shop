@@ -39,8 +39,10 @@ class CategoriesController < ApplicationController
 	end
 
 	def destroy
-		if !ProductCategory.find_by(category_id: params[:id]).nil?
-			ProductCategory.find_by(category_id: params[:id]).destroy
+		unless ProductCategory.where(category_id: params[:id]).nil?
+			ProductCategory.where(category_id: params[:id]).each do |item| 
+				item.destroy
+			end
 		end
 		Category.find(params[:id]).destroy
 		flash[:success] = "category deleted"
