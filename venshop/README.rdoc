@@ -1,5 +1,5 @@
 == README
 
-This is my project using Ruby on Rails to build a online shoping store. I do it in ZIGExN Ventura's intership program.
+This is my project using Ruby on Rails and PostgreSQL to build a online shoping store. I do it in ZIGExN Ventura's intership program.
 
 Link demo: https://venshop-ntduy.herokuapp.com/
