@@ -19,15 +19,14 @@
     <%= f.text_field :price, class: 'form-control marginbottom10' %>
 
     <%= f.label :categories, "Categories" %><br>
+    
     <% @categories.each do |category| %>
-    <% @current_categories.each do |cur_category| %>
-        <%if category == cur_category%>
-            <%=check_box("categories","name", {:multiple => true,checked: true}, category.id, nil) %>
-            <% else %>
-            <%=check_box("categories","name", {:multiple => true}, category.id, nil) %>
-            <% end %>
-            <span> <%=category.name%></span><br>
-    <% end %>
+        <%if @current_categories.include?(category)%>
+        <%=check_box("categories","name", {:multiple => true,checked: true}, category.id, nil) %>
+        <% else %>
+        <%=check_box("categories","name", {:multiple => true}, category.id, nil) %>
+        <% end %>
+        <span> <%=category.name%></span><br>
     <% end %>
     <%= f.submit "Save changes", class: "btn btn-primary" %>
     <% end %>

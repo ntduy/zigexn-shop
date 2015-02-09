@@ -23,7 +23,7 @@ class UserMailer < ApplicationMailer
   def checkout_cart(user, cart)
     @user = user
     @cart = cart
-    mail to: user.email, subject: "Checking your cart"
+    mail to: cart.email, subject: "Checking your cart"
   end
 
 end

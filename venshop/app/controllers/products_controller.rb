@@ -42,8 +42,10 @@ class ProductsController < ApplicationController
 			if !ProductCategory.find_by(product_id: params[:id]).nil?
 				ProductCategory.find_by(product_id: params[:id]).destroy
 			end
-			params[:categories][:name].each do |category_id|
-				ProductCategory.create!(product_id: @product.id, category_id: category_id)
+			unless params[:categories].nil?
+				params[:categories][:name].each do |category_id|
+					ProductCategory.create!(product_id: @product.id, category_id: category_id)
+				end
 			end
 			render 'show'
 		else
@@ -52,16 +54,6 @@ class ProductsController < ApplicationController
 	end
 
 	def destroy
-		unless ProductCategory.where(product_id: params[:id]).nil?
-			ProductCategory.where(product_id: params[:id]).each do |item| 
-				item.destroy
-			end
-		end
-		unless CartDetail.where(product_id: params[:id]).nil?
-			CartDetail.where(product_id: params[:id]).each do |item| 
-				item.destroy
-			end
-		end
 		Product.find(params[:id]).destroy
 		flash[:success] = "product deleted"
 		redirect_to products_url

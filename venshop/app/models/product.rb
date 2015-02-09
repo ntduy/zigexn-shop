@@ -2,7 +2,7 @@ class Product < ActiveRecord::Base
 	has_many :category_relationship, class_name: "ProductCategory", foreign_key: "product_id", dependent: :destroy
 	has_many :categories, through: :category_relationship, source: :category
 
-	has_many :cart_details
+	has_many :cart_details, dependent: :destroy
 	has_many :carts, through: :cart_details
 
 	validates :name, presence: true
