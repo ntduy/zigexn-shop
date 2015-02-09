@@ -34,7 +34,7 @@ class CartsController < ApplicationController
 		end
 		if @cart.save
 			cart_ss[:items].each do |item|
-				if item[:quantity] < 0
+				if item[:quantity] <= 0
 					flash[:danger] = "quantity < 0. Failed"
 					redirect_to new_cart_path
 				else
