@@ -39,8 +39,11 @@ class ProductsController < ApplicationController
 	def update
 		@product = Product.find(params[:id])
 		if @product.update_attributes(product_params)
-			if !ProductCategory.find_by(product_id: params[:id]).nil?
-				ProductCategory.find_by(product_id: params[:id]).destroy
+			pro_cate = ProductCategory.where(product_id: params[:id])
+			unless pro_cate.nil?
+				pro_cate.each do |item|
+					item.destroy
+				end
 			end
 			unless params[:categories].nil?
 				params[:categories][:name].each do |category_id|
