@@ -7,8 +7,8 @@ Rails.application.configure do
     address:              'smtp.gmail.com',
     port:                 587,
     domain:               'localhost:3000',
-    user_name:            'ntduy2193@gmail.com',
-    password:           'mismonkey',
+    user_name:            '',
+    password:           '',
     authentication:       'plain',
     enable_starttls_auto: true  }
   # In the development environment your application's code is reloaded on
