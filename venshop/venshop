@@ -1,0 +1,782 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.3.5
+-- Dumped by pg_dump version 9.3.5
+-- Started on 2015-02-09 14:11:42 ICT
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'SQL_ASCII';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 183 (class 3079 OID 11791)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2053 (class 0 OID 0)
+-- Dependencies: 183
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 182 (class 1259 OID 27748)
+-- Name: cart_details; Type: TABLE; Schema: public; Owner: ntduy; Tablespace: 
+--
+
+CREATE TABLE cart_details (
+    id integer NOT NULL,
+    cart_id integer,
+    product_id integer,
+    quantity integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.cart_details OWNER TO ntduy;
+
+--
+-- TOC entry 181 (class 1259 OID 27746)
+-- Name: cart_details_id_seq; Type: SEQUENCE; Schema: public; Owner: ntduy
+--
+
+CREATE SEQUENCE cart_details_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.cart_details_id_seq OWNER TO ntduy;
+
+--
+-- TOC entry 2054 (class 0 OID 0)
+-- Dependencies: 181
+-- Name: cart_details_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ntduy
+--
+
+ALTER SEQUENCE cart_details_id_seq OWNED BY cart_details.id;
+
+
+--
+-- TOC entry 180 (class 1259 OID 27737)
+-- Name: carts; Type: TABLE; Schema: public; Owner: ntduy; Tablespace: 
+--
+
+CREATE TABLE carts (
+    id integer NOT NULL,
+    user_id integer,
+    status character varying,
+    name character varying,
+    email character varying,
+    address character varying,
+    phone character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.carts OWNER TO ntduy;
+
+--
+-- TOC entry 179 (class 1259 OID 27735)
+-- Name: carts_id_seq; Type: SEQUENCE; Schema: public; Owner: ntduy
+--
+
+CREATE SEQUENCE carts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.carts_id_seq OWNER TO ntduy;
+
+--
+-- TOC entry 2055 (class 0 OID 0)
+-- Dependencies: 179
+-- Name: carts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ntduy
+--
+
+ALTER SEQUENCE carts_id_seq OWNED BY carts.id;
+
+
+--
+-- TOC entry 176 (class 1259 OID 27718)
+-- Name: categories; Type: TABLE; Schema: public; Owner: ntduy; Tablespace: 
+--
+
+CREATE TABLE categories (
+    id integer NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    name character varying
+);
+
+
+ALTER TABLE public.categories OWNER TO ntduy;
+
+--
+-- TOC entry 175 (class 1259 OID 27716)
+-- Name: categories_id_seq; Type: SEQUENCE; Schema: public; Owner: ntduy
+--
+
+CREATE SEQUENCE categories_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.categories_id_seq OWNER TO ntduy;
+
+--
+-- TOC entry 2056 (class 0 OID 0)
+-- Dependencies: 175
+-- Name: categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ntduy
+--
+
+ALTER SEQUENCE categories_id_seq OWNED BY categories.id;
+
+
+--
+-- TOC entry 178 (class 1259 OID 27729)
+-- Name: product_categories; Type: TABLE; Schema: public; Owner: ntduy; Tablespace: 
+--
+
+CREATE TABLE product_categories (
+    id integer NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    product_id integer,
+    category_id integer
+);
+
+
+ALTER TABLE public.product_categories OWNER TO ntduy;
+
+--
+-- TOC entry 177 (class 1259 OID 27727)
+-- Name: product_categories_id_seq; Type: SEQUENCE; Schema: public; Owner: ntduy
+--
+
+CREATE SEQUENCE product_categories_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.product_categories_id_seq OWNER TO ntduy;
+
+--
+-- TOC entry 2057 (class 0 OID 0)
+-- Dependencies: 177
+-- Name: product_categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ntduy
+--
+
+ALTER SEQUENCE product_categories_id_seq OWNED BY product_categories.id;
+
+
+--
+-- TOC entry 174 (class 1259 OID 27706)
+-- Name: products; Type: TABLE; Schema: public; Owner: ntduy; Tablespace: 
+--
+
+CREATE TABLE products (
+    id integer NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    name character varying,
+    image_url character varying,
+    description character varying,
+    price double precision
+);
+
+
+ALTER TABLE public.products OWNER TO ntduy;
+
+--
+-- TOC entry 173 (class 1259 OID 27704)
+-- Name: products_id_seq; Type: SEQUENCE; Schema: public; Owner: ntduy
+--
+
+CREATE SEQUENCE products_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.products_id_seq OWNER TO ntduy;
+
+--
+-- TOC entry 2058 (class 0 OID 0)
+-- Dependencies: 173
+-- Name: products_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ntduy
+--
+
+ALTER SEQUENCE products_id_seq OWNED BY products.id;
+
+
+--
+-- TOC entry 170 (class 1259 OID 27684)
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: ntduy; Tablespace: 
+--
+
+CREATE TABLE schema_migrations (
+    version character varying NOT NULL
+);
+
+
+ALTER TABLE public.schema_migrations OWNER TO ntduy;
+
+--
+-- TOC entry 172 (class 1259 OID 27693)
+-- Name: users; Type: TABLE; Schema: public; Owner: ntduy; Tablespace: 
+--
+
+CREATE TABLE users (
+    id integer NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    name character varying,
+    email character varying,
+    address character varying,
+    phone character varying,
+    admin boolean DEFAULT false,
+    password_digest character varying,
+    remember_digest character varying,
+    activation_digest character varying,
+    activated boolean DEFAULT false,
+    activated_at timestamp without time zone,
+    reset_digest character varying,
+    reset_sent_at timestamp without time zone
+);
+
+
+ALTER TABLE public.users OWNER TO ntduy;
+
+--
+-- TOC entry 171 (class 1259 OID 27691)
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: ntduy
+--
+
+CREATE SEQUENCE users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO ntduy;
+
+--
+-- TOC entry 2059 (class 0 OID 0)
+-- Dependencies: 171
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ntduy
+--
+
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
+
+
+--
+-- TOC entry 1909 (class 2604 OID 27751)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ntduy
+--
+
+ALTER TABLE ONLY cart_details ALTER COLUMN id SET DEFAULT nextval('cart_details_id_seq'::regclass);
+
+
+--
+-- TOC entry 1908 (class 2604 OID 27740)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ntduy
+--
+
+ALTER TABLE ONLY carts ALTER COLUMN id SET DEFAULT nextval('carts_id_seq'::regclass);
+
+
+--
+-- TOC entry 1906 (class 2604 OID 27721)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ntduy
+--
+
+ALTER TABLE ONLY categories ALTER COLUMN id SET DEFAULT nextval('categories_id_seq'::regclass);
+
+
+--
+-- TOC entry 1907 (class 2604 OID 27732)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ntduy
+--
+
+ALTER TABLE ONLY product_categories ALTER COLUMN id SET DEFAULT nextval('product_categories_id_seq'::regclass);
+
+
+--
+-- TOC entry 1905 (class 2604 OID 27709)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ntduy
+--
+
+ALTER TABLE ONLY products ALTER COLUMN id SET DEFAULT nextval('products_id_seq'::regclass);
+
+
+--
+-- TOC entry 1902 (class 2604 OID 27696)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ntduy
+--
+
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- TOC entry 2045 (class 0 OID 27748)
+-- Dependencies: 182
+-- Data for Name: cart_details; Type: TABLE DATA; Schema: public; Owner: ntduy
+--
+
+COPY cart_details (id, cart_id, product_id, quantity, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2060 (class 0 OID 0)
+-- Dependencies: 181
+-- Name: cart_details_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ntduy
+--
+
+SELECT pg_catalog.setval('cart_details_id_seq', 1, false);
+
+
+--
+-- TOC entry 2043 (class 0 OID 27737)
+-- Dependencies: 180
+-- Data for Name: carts; Type: TABLE DATA; Schema: public; Owner: ntduy
+--
+
+COPY carts (id, user_id, status, name, email, address, phone, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2061 (class 0 OID 0)
+-- Dependencies: 179
+-- Name: carts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ntduy
+--
+
+SELECT pg_catalog.setval('carts_id_seq', 1, false);
+
+
+--
+-- TOC entry 2039 (class 0 OID 27718)
+-- Dependencies: 176
+-- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: ntduy
+--
+
+COPY categories (id, created_at, updated_at, name) FROM stdin;
+1	2015-02-09 06:59:15.957329	2015-02-09 06:59:15.957329	Baby
+2	2015-02-09 06:59:22.918876	2015-02-09 06:59:22.918876	Beauty
+3	2015-02-09 06:59:30.462862	2015-02-09 06:59:30.462862	Books
+\.
+
+
+--
+-- TOC entry 2062 (class 0 OID 0)
+-- Dependencies: 175
+-- Name: categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ntduy
+--
+
+SELECT pg_catalog.setval('categories_id_seq', 3, true);
+
+
+--
+-- TOC entry 2041 (class 0 OID 27729)
+-- Dependencies: 178
+-- Data for Name: product_categories; Type: TABLE DATA; Schema: public; Owner: ntduy
+--
+
+COPY product_categories (id, created_at, updated_at, product_id, category_id) FROM stdin;
+1	2015-02-09 06:59:18.049238	2015-02-09 06:59:18.049238	1	1
+2	2015-02-09 06:59:18.079475	2015-02-09 06:59:18.079475	2	1
+3	2015-02-09 06:59:18.104393	2015-02-09 06:59:18.104393	3	1
+4	2015-02-09 06:59:18.129676	2015-02-09 06:59:18.129676	4	1
+5	2015-02-09 06:59:18.154203	2015-02-09 06:59:18.154203	5	1
+6	2015-02-09 06:59:18.179061	2015-02-09 06:59:18.179061	6	1
+7	2015-02-09 06:59:18.202216	2015-02-09 06:59:18.202216	7	1
+8	2015-02-09 06:59:18.243452	2015-02-09 06:59:18.243452	8	1
+9	2015-02-09 06:59:18.269142	2015-02-09 06:59:18.269142	9	1
+10	2015-02-09 06:59:18.293582	2015-02-09 06:59:18.293582	10	1
+11	2015-02-09 06:59:20.21644	2015-02-09 06:59:20.21644	11	1
+12	2015-02-09 06:59:20.241272	2015-02-09 06:59:20.241272	12	1
+13	2015-02-09 06:59:20.264655	2015-02-09 06:59:20.264655	13	1
+14	2015-02-09 06:59:20.289434	2015-02-09 06:59:20.289434	14	1
+15	2015-02-09 06:59:20.314353	2015-02-09 06:59:20.314353	15	1
+16	2015-02-09 06:59:20.339247	2015-02-09 06:59:20.339247	16	1
+17	2015-02-09 06:59:20.364067	2015-02-09 06:59:20.364067	17	1
+18	2015-02-09 06:59:20.387441	2015-02-09 06:59:20.387441	18	1
+19	2015-02-09 06:59:20.412665	2015-02-09 06:59:20.412665	19	1
+20	2015-02-09 06:59:20.437332	2015-02-09 06:59:20.437332	20	1
+21	2015-02-09 06:59:22.659715	2015-02-09 06:59:22.659715	21	1
+22	2015-02-09 06:59:22.692852	2015-02-09 06:59:22.692852	22	1
+23	2015-02-09 06:59:22.717905	2015-02-09 06:59:22.717905	23	1
+24	2015-02-09 06:59:22.749648	2015-02-09 06:59:22.749648	24	1
+25	2015-02-09 06:59:22.774267	2015-02-09 06:59:22.774267	25	1
+26	2015-02-09 06:59:22.80793	2015-02-09 06:59:22.80793	26	1
+27	2015-02-09 06:59:22.832615	2015-02-09 06:59:22.832615	27	1
+28	2015-02-09 06:59:22.857507	2015-02-09 06:59:22.857507	28	1
+29	2015-02-09 06:59:22.881925	2015-02-09 06:59:22.881925	29	1
+30	2015-02-09 06:59:22.905087	2015-02-09 06:59:22.905087	30	1
+31	2015-02-09 06:59:25.187561	2015-02-09 06:59:25.187561	31	2
+32	2015-02-09 06:59:25.231235	2015-02-09 06:59:25.231235	32	2
+33	2015-02-09 06:59:25.255747	2015-02-09 06:59:25.255747	33	2
+34	2015-02-09 06:59:25.282321	2015-02-09 06:59:25.282321	34	2
+35	2015-02-09 06:59:25.307187	2015-02-09 06:59:25.307187	35	2
+36	2015-02-09 06:59:25.332043	2015-02-09 06:59:25.332043	36	2
+37	2015-02-09 06:59:25.355572	2015-02-09 06:59:25.355572	37	2
+38	2015-02-09 06:59:25.389018	2015-02-09 06:59:25.389018	38	2
+39	2015-02-09 06:59:25.414353	2015-02-09 06:59:25.414353	39	2
+40	2015-02-09 06:59:25.438629	2015-02-09 06:59:25.438629	40	2
+41	2015-02-09 06:59:27.803142	2015-02-09 06:59:27.803142	41	2
+42	2015-02-09 06:59:27.827717	2015-02-09 06:59:27.827717	42	2
+43	2015-02-09 06:59:27.851141	2015-02-09 06:59:27.851141	43	2
+44	2015-02-09 06:59:27.875784	2015-02-09 06:59:27.875784	44	2
+45	2015-02-09 06:59:27.900446	2015-02-09 06:59:27.900446	45	2
+46	2015-02-09 06:59:27.925465	2015-02-09 06:59:27.925465	46	2
+47	2015-02-09 06:59:27.950371	2015-02-09 06:59:27.950371	47	2
+48	2015-02-09 06:59:27.975012	2015-02-09 06:59:27.975012	48	2
+49	2015-02-09 06:59:28.006745	2015-02-09 06:59:28.006745	49	2
+50	2015-02-09 06:59:28.040024	2015-02-09 06:59:28.040024	50	2
+51	2015-02-09 06:59:30.22901	2015-02-09 06:59:30.22901	51	2
+52	2015-02-09 06:59:30.253808	2015-02-09 06:59:30.253808	52	2
+53	2015-02-09 06:59:30.277334	2015-02-09 06:59:30.277334	53	2
+54	2015-02-09 06:59:30.302058	2015-02-09 06:59:30.302058	54	2
+55	2015-02-09 06:59:30.326968	2015-02-09 06:59:30.326968	55	2
+56	2015-02-09 06:59:30.351855	2015-02-09 06:59:30.351855	56	2
+57	2015-02-09 06:59:30.376849	2015-02-09 06:59:30.376849	57	2
+58	2015-02-09 06:59:30.401537	2015-02-09 06:59:30.401537	58	2
+59	2015-02-09 06:59:30.424949	2015-02-09 06:59:30.424949	59	2
+60	2015-02-09 06:59:30.450009	2015-02-09 06:59:30.450009	60	2
+61	2015-02-09 06:59:32.617652	2015-02-09 06:59:32.617652	61	3
+62	2015-02-09 06:59:32.642221	2015-02-09 06:59:32.642221	62	3
+63	2015-02-09 06:59:32.667216	2015-02-09 06:59:32.667216	63	3
+64	2015-02-09 06:59:32.691883	2015-02-09 06:59:32.691883	64	3
+65	2015-02-09 06:59:32.71681	2015-02-09 06:59:32.71681	65	3
+66	2015-02-09 06:59:32.741605	2015-02-09 06:59:32.741605	66	3
+67	2015-02-09 06:59:32.765269	2015-02-09 06:59:32.765269	67	3
+68	2015-02-09 06:59:32.790125	2015-02-09 06:59:32.790125	68	3
+69	2015-02-09 06:59:32.814777	2015-02-09 06:59:32.814777	69	3
+70	2015-02-09 06:59:32.848108	2015-02-09 06:59:32.848108	70	3
+71	2015-02-09 06:59:35.076993	2015-02-09 06:59:35.076993	71	3
+72	2015-02-09 06:59:35.118838	2015-02-09 06:59:35.118838	72	3
+73	2015-02-09 06:59:35.143387	2015-02-09 06:59:35.143387	73	3
+74	2015-02-09 06:59:35.168238	2015-02-09 06:59:35.168238	74	3
+75	2015-02-09 06:59:35.193179	2015-02-09 06:59:35.193179	75	3
+76	2015-02-09 06:59:35.218054	2015-02-09 06:59:35.218054	76	3
+77	2015-02-09 06:59:35.242916	2015-02-09 06:59:35.242916	77	3
+78	2015-02-09 06:59:35.266433	2015-02-09 06:59:35.266433	78	3
+79	2015-02-09 06:59:35.291162	2015-02-09 06:59:35.291162	79	3
+80	2015-02-09 06:59:35.316021	2015-02-09 06:59:35.316021	80	3
+81	2015-02-09 06:59:37.397201	2015-02-09 06:59:37.397201	81	3
+82	2015-02-09 06:59:37.421909	2015-02-09 06:59:37.421909	82	3
+83	2015-02-09 06:59:37.454075	2015-02-09 06:59:37.454075	83	3
+84	2015-02-09 06:59:37.478484	2015-02-09 06:59:37.478484	84	3
+85	2015-02-09 06:59:37.50387	2015-02-09 06:59:37.50387	85	3
+86	2015-02-09 06:59:37.536871	2015-02-09 06:59:37.536871	86	3
+87	2015-02-09 06:59:37.563174	2015-02-09 06:59:37.563174	87	3
+88	2015-02-09 06:59:37.588352	2015-02-09 06:59:37.588352	88	3
+89	2015-02-09 06:59:37.611501	2015-02-09 06:59:37.611501	89	3
+90	2015-02-09 06:59:37.637058	2015-02-09 06:59:37.637058	90	3
+\.
+
+
+--
+-- TOC entry 2063 (class 0 OID 0)
+-- Dependencies: 177
+-- Name: product_categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ntduy
+--
+
+SELECT pg_catalog.setval('product_categories_id_seq', 90, true);
+
+
+--
+-- TOC entry 2037 (class 0 OID 27706)
+-- Dependencies: 174
+-- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: ntduy
+--
+
+COPY products (id, created_at, updated_at, name, image_url, description, price) FROM stdin;
+1	2015-02-09 06:59:17.989673	2015-02-09 06:59:17.989673	BIRDS ON A WIRE Picture Hangers, Set of 8	http://ecx.images-amazon.com/images/I/519Wk6l94JL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	12
+2	2015-02-09 06:59:18.068279	2015-02-09 06:59:18.068279	aden + anais Classic Muslin Swaddle Blanket For The Birds, 4 Count	http://ecx.images-amazon.com/images/I/41Oq6RWJIhL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	49
+3	2015-02-09 06:59:18.093081	2015-02-09 06:59:18.093081	RoomMates RMK1794SCS Angry Birds Peel and Stick Wall Decals	http://ecx.images-amazon.com/images/I/51YScz8ntiL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	15
+4	2015-02-09 06:59:18.11802	2015-02-09 06:59:18.11802	Roommates RMK2164SCS Angry Birds Star Wars Peel  and  Stick Wall Decals	http://ecx.images-amazon.com/images/I/51sVif7KQvL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	15
+5	2015-02-09 06:59:18.141261	2015-02-09 06:59:18.141261	Streamline Bird Nightlight, 3"	http://ecx.images-amazon.com/images/I/31e5RCLYJ2L.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	0
+6	2015-02-09 06:59:18.166028	2015-02-09 06:59:18.166028	Angry Birds Star Wars 5" Bird - Chewbacca	http://ecx.images-amazon.com/images/I/41sHEI5p5cL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	14
+7	2015-02-09 06:59:18.190995	2015-02-09 06:59:18.190995	Playskool Heroes Angry Birds Go Red Bird Slingshot Slamway	http://ecx.images-amazon.com/images/I/51DCNkBq3rL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	21
+8	2015-02-09 06:59:18.215803	2015-02-09 06:59:18.215803	Nojo Love Birds 100% Cotton Crib Sheet	http://ecx.images-amazon.com/images/I/51%2BQkruVdsL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	19
+9	2015-02-09 06:59:18.25743	2015-02-09 06:59:18.25743	Angry Birds Space 8-Inch Red Bird with Sound	http://ecx.images-amazon.com/images/I/41pslKCMK2L.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	19
+10	2015-02-09 06:59:18.280897	2015-02-09 06:59:18.280897	Nojo Love Birds 4 Piece Comforter Set with Diaper Stacker	http://ecx.images-amazon.com/images/I/51IYgsAUK1L.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	159
+11	2015-02-09 06:59:20.197888	2015-02-09 06:59:20.197888	Playskool Heroes Angry Birds Go! King Pig Basher	http://ecx.images-amazon.com/images/I/41wplGU-EML.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	10
+12	2015-02-09 06:59:20.228417	2015-02-09 06:59:20.228417	Nojo Love Birds Baby Record Book	http://ecx.images-amazon.com/images/I/51ja84UJlKL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	24
+13	2015-02-09 06:59:20.253318	2015-02-09 06:59:20.253318	Nojo Love Birds Hamper	http://ecx.images-amazon.com/images/I/41RdbDT1WNL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	44
+14	2015-02-09 06:59:20.278231	2015-02-09 06:59:20.278231	aden + anais 3 Pack Muslin Snap Bib, For The Birds	http://ecx.images-amazon.com/images/I/41jzFlRyCbL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	19
+15	2015-02-09 06:59:20.303023	2015-02-09 06:59:20.303023	Playskool Heroes Angry Birds Go! Red Bird Basher	http://ecx.images-amazon.com/images/I/515z4fTvE8L.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	10
+16	2015-02-09 06:59:20.326295	2015-02-09 06:59:20.326295	JW Pet Company Clean Cup Feeder and Water Cup Bird Accessory, Small, Colors may vary	http://ecx.images-amazon.com/images/I/51HY8aBcFXL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	3
+17	2015-02-09 06:59:20.351062	2015-02-09 06:59:20.351062	Angry Birds Playskool Heroes Angry Birds Go! Big Red Bird and Helmet Pig	http://ecx.images-amazon.com/images/I/4187m60dTXL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	10
+18	2015-02-09 06:59:20.376137	2015-02-09 06:59:20.376137	Magnificent Baby Baby-Girls Newborn Love Birds Reversible Hat, Love Birds, One Size	http://ecx.images-amazon.com/images/I/512erbfHw0L.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	9
+19	2015-02-09 06:59:20.40108	2015-02-09 06:59:20.40108	Nojo Love Birds 2 Piece Canvas Wall Decor	http://ecx.images-amazon.com/images/I/41F-b6p-0CL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	27
+20	2015-02-09 06:59:20.425985	2015-02-09 06:59:20.425985	Leveret Footed "Birds Design" Pajama Sleeper 100% Cotton (Sizes 6M-5T) (3 Toddler)	http://ecx.images-amazon.com/images/I/51vpm%2BfOEGL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	27
+21	2015-02-09 06:59:22.598413	2015-02-09 06:59:22.598413	Vulli Kiwi the Bird Teether	http://ecx.images-amazon.com/images/I/415wnuTzh4L.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	25
+22	2015-02-09 06:59:22.673007	2015-02-09 06:59:22.673007	International Playthings ELC Bendy Bird	http://ecx.images-amazon.com/images/I/41o-iiZQwIL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	14
+23	2015-02-09 06:59:22.705231	2015-02-09 06:59:22.705231	Nojo Love Birds Musical Mobile	http://ecx.images-amazon.com/images/I/41OY9BqWwML.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	46
+24	2015-02-09 06:59:22.73063	2015-02-09 06:59:22.73063	Nojo Love Birds Traditional Padded Bumper	http://ecx.images-amazon.com/images/I/41Bo4j41czL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	66
+25	2015-02-09 06:59:22.763135	2015-02-09 06:59:22.763135	Aden + Anais 6 Pack Muslin Snap Bibs, For the Birds	http://ecx.images-amazon.com/images/I/51VfScwMnhL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	0
+26	2015-02-09 06:59:22.788282	2015-02-09 06:59:22.788282	Nojo Love Birds Lamp and Shade	http://ecx.images-amazon.com/images/I/31dEFo3exPL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	56
+27	2015-02-09 06:59:22.82131	2015-02-09 06:59:22.82131	aden + anais 100% Cotton Muslin Changing Pad Cover - For The Birds/Medallion	http://ecx.images-amazon.com/images/I/41ddMAGEp-L.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	24
+28	2015-02-09 06:59:22.8441	2015-02-09 06:59:22.8441	Angry Birds Neoprene Molded Lunch Bag	http://ecx.images-amazon.com/images/I/21XC-ov-4kL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	19
+29	2015-02-09 06:59:22.868657	2015-02-09 06:59:22.868657	aden + anais Muslin Burpy Bib, 4 pack - For the Birds	http://ecx.images-amazon.com/images/I/41pcBiBxlYL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	0
+30	2015-02-09 06:59:22.893761	2015-02-09 06:59:22.893761	Timmy Bird	http://ecx.images-amazon.com/images/I/41xYoDP09HL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	17
+31	2015-02-09 06:59:25.066914	2015-02-09 06:59:25.066914	Conair Yb075w Hair Dryer 1875w Yellow Bird	http://ecx.images-amazon.com/images/I/311AtcBFmKL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	59
+32	2015-02-09 06:59:25.219506	2015-02-09 06:59:25.219506	Poop-Off Bird Poop Remover Brush Top, 16-Ounce	http://ecx.images-amazon.com/images/I/3199TMDnV8L.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	22
+33	2015-02-09 06:59:25.244465	2015-02-09 06:59:25.244465	My Beauty Diary 074524 Fashion City Imperial Bird's Nest Face Mask, 10 Count	http://ecx.images-amazon.com/images/I/41DQNPtzmQL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	13
+34	2015-02-09 06:59:25.271337	2015-02-09 06:59:25.271337	Rovio Angry Birds Space Potbellie Character Accent Pillow, "Red Bird"	http://ecx.images-amazon.com/images/I/41rbzeRhujL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	19
+35	2015-02-09 06:59:25.29487	2015-02-09 06:59:25.29487	Flock of Black Birds Temporary Tattoo (Set of 2)	http://ecx.images-amazon.com/images/I/51Db2n0rrRL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	0
+36	2015-02-09 06:59:25.319371	2015-02-09 06:59:25.319371	Spestyle new design hot selling fashionable large feather and many birds temporary tattoo stcker	http://ecx.images-amazon.com/images/I/51sM3nZ8HJL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	9
+37	2015-02-09 06:59:25.344174	2015-02-09 06:59:25.344174	Angry Birds Large Accent Floor Rug 39 in X 56 In	http://ecx.images-amazon.com/images/I/41RI21Z9PML.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	0
+38	2015-02-09 06:59:25.369329	2015-02-09 06:59:25.369329	Conair Yellow Bird	http://ecx.images-amazon.com/images/I/312XPS3W75L.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	0
+39	2015-02-09 06:59:25.402305	2015-02-09 06:59:25.402305	My Beauty Diary Imperial Bird's Nest Mask	http://ecx.images-amazon.com/images/I/41XmTNgzFAL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	0
+40	2015-02-09 06:59:25.425772	2015-02-09 06:59:25.425772	Docooler® Temporary Tattoo Stickers Waterproof Tattoos Various Body Art Stickers Birds Pattern Style 5	http://ecx.images-amazon.com/images/I/41PtRyVgTbL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	0
+41	2015-02-09 06:59:27.765128	2015-02-09 06:59:27.765128	LeChat Perfect Match DUAL SET Soak Off Gel Polish and Dare to Wear Nail Lacquer - Red Bird - PMS33	http://ecx.images-amazon.com/images/I/41P10wdHMDL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	0
+42	2015-02-09 06:59:27.814348	2015-02-09 06:59:27.814348	NARS Opaque Nail Polish, Storm Bird	http://ecx.images-amazon.com/images/I/416z5DNptwL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	19
+43	2015-02-09 06:59:27.839422	2015-02-09 06:59:27.839422	Anself Fashion Body Art Stickers Tattoo Sticker Birds Furs Pattern Waterproof Temporary Tattooing Paper	http://ecx.images-amazon.com/images/I/41SD8jrflmL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	0
+44	2015-02-09 06:59:27.864483	2015-02-09 06:59:27.864483	GGSELL GGSELL KING HORSE hot selling New design birds and feathers temporary tattoo stckers	http://ecx.images-amazon.com/images/I/518hROMVn%2BL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	0
+45	2015-02-09 06:59:27.889317	2015-02-09 06:59:27.889317	Birds - temporary tattoo (Set of 4)	http://ecx.images-amazon.com/images/I/51EL8308bHL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	0
+46	2015-02-09 06:59:27.912455	2015-02-09 06:59:27.912455	Metallic Temporary Tattoos (2 Sheets) - Beautiful Tattoo Flash & Body Art - Black, Silver & Gold Tattoo Jewelry - Trendy Tattoo Designs - Bracelets, Geometric Designs, Bands, Birds, Trees, Arrows, Feathers and More |Twink Designs | Each Page Is: 8" X 5"	http://ecx.images-amazon.com/images/I/51YmHbe6P6L.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	20
+47	2015-02-09 06:59:27.937346	2015-02-09 06:59:27.937346	2-packs Elegant Temporary Tattoos, Sexy Finger, Shoulder, Neck, Arm Tattoo - Love the Bird & Feather	http://ecx.images-amazon.com/images/I/51JlWkOWciL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	0
+48	2015-02-09 06:59:27.96217	2015-02-09 06:59:27.96217	butter LONDON Nail Lacquer, Purple Shades, Posh Bird	http://ecx.images-amazon.com/images/I/41KPddTrsBL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	15
+49	2015-02-09 06:59:27.987458	2015-02-09 06:59:27.987458	My Beauty Diary Mask, Bird's Nest, 10 Count	http://ecx.images-amazon.com/images/I/41apRLEpvZL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	13
+50	2015-02-09 06:59:28.020667	2015-02-09 06:59:28.020667	ECBASKET Sexy Body Art Sticker Black Swallow Bird Pattern Removable Waterproof Temporary Tattoos Body Stickers	http://ecx.images-amazon.com/images/I/41T5-ufU1nL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	0
+51	2015-02-09 06:59:30.191706	2015-02-09 06:59:30.191706	Air-Val International Angry Birds Miniatures Eau de Parfum Collection, 4 Count	http://ecx.images-amazon.com/images/I/21RfsUuz4cL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	17
+52	2015-02-09 06:59:30.241085	2015-02-09 06:59:30.241085	Birds - temporary tattoo (Set of 2)	http://ecx.images-amazon.com/images/I/51elPxOUJ4L.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	0
+53	2015-02-09 06:59:30.266008	2015-02-09 06:59:30.266008	LeChat Perfect Match DUAL SET Soak Off Gel Polish and Dare to Wear Nail Lacquer - Mockingbird - PMS27	http://ecx.images-amazon.com/images/I/31fYv4UgPKL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	0
+54	2015-02-09 06:59:30.290806	2015-02-09 06:59:30.290806	Multilayer Alloy Love Birds Life Tree and Infinity Handmade Leather Bracelet	http://ecx.images-amazon.com/images/I/41HzO7O7tiL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	0
+55	2015-02-09 06:59:30.3156	2015-02-09 06:59:30.3156	Birds - temporary tattoo (Set of 2)	http://ecx.images-amazon.com/images/I/5193PSNfYbL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	0
+56	2015-02-09 06:59:30.34027	2015-02-09 06:59:30.34027	Bird -temporary tattoo set of 3	http://ecx.images-amazon.com/images/I/41u9VmVW75L.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	0
+57	2015-02-09 06:59:30.363815	2015-02-09 06:59:30.363815	Vera Bradley Small Cosmetic in Twirly Birds Navy	http://ecx.images-amazon.com/images/I/41lRoiaDV7L.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	0
+58	2015-02-09 06:59:30.388823	2015-02-09 06:59:30.388823	Thai Kitchen Seasoning, Bird Eye Chilis, 0.80 Ounce	http://ecx.images-amazon.com/images/I/514knslarQL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	5
+59	2015-02-09 06:59:30.413759	2015-02-09 06:59:30.413759	Lot of 10 Small Little Birdies Birds Paper Gift Bags 5 ¼" X 3 ¼" X 8 ¾" (Rose)	http://ecx.images-amazon.com/images/I/31SOdEpxflL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	0
+60	2015-02-09 06:59:30.438533	2015-02-09 06:59:30.438533	Angry Birds Standard Party Pack for 16 Party Accessory	http://ecx.images-amazon.com/images/I/61o9CEdWmLL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	50
+61	2015-02-09 06:59:32.60304	2015-02-09 06:59:32.60304	National Geographic Backyard Guide to the Birds of North America (National Geographic Backyard Guides)	http://ecx.images-amazon.com/images/I/51bxdc7goZL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	18
+62	2015-02-09 06:59:32.631147	2015-02-09 06:59:32.631147	Birds	http://ecx.images-amazon.com/images/I/51VSkdHS1BL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	17
+63	2015-02-09 06:59:32.655979	2015-02-09 06:59:32.655979	Extreme Birds: The World's Most Extraordinary and Bizarre Birds	http://ecx.images-amazon.com/images/I/51e0HKVacDL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	24
+64	2015-02-09 06:59:32.680407	2015-02-09 06:59:32.680407	National Geographic Complete Birds of North America, 2nd Edition: Now Covering More Than 1,000 Species With the Most-Detailed Information Found in a Single Volume	http://ecx.images-amazon.com/images/I/513jYLK63%2BL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	40
+65	2015-02-09 06:59:32.704561	2015-02-09 06:59:32.704561	The World of Birds	http://ecx.images-amazon.com/images/I/51Ty-vNqtAL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	75
+66	2015-02-09 06:59:32.728779	2015-02-09 06:59:32.728779	National Geographic Kids Bird Guide of North America: The Best Birding Book for Kids from National Geographic's Bird Experts	http://ecx.images-amazon.com/images/I/516b4SVMUnL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	15
+67	2015-02-09 06:59:32.754232	2015-02-09 06:59:32.754232	About Birds: A Guide for Children, 2nd edition	http://ecx.images-amazon.com/images/I/514BQFj8wkL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	7
+68	2015-02-09 06:59:32.77833	2015-02-09 06:59:32.77833	Bird Bingo	http://ecx.images-amazon.com/images/I/51kerTkZzLL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	29
+69	2015-02-09 06:59:32.803668	2015-02-09 06:59:32.803668	The Birds of Pandemonium	http://ecx.images-amazon.com/images/I/51s2EpR4WxL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	24
+70	2015-02-09 06:59:32.829515	2015-02-09 06:59:32.829515	National Geographic Field Guide to the Birds of North America, Sixth Edition	http://ecx.images-amazon.com/images/I/51ytqdBaF-L.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	27
+71	2015-02-09 06:59:34.96003	2015-02-09 06:59:34.96003	Risen Light Nature Photography of Birds	http://ecx.images-amazon.com/images/I/51XpAGMOFWL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	0
+72	2015-02-09 06:59:35.107285	2015-02-09 06:59:35.107285	The Complete Illustrated Encyclopedia of Birds of the World: The ultimate reference source and identifier for 1600 birds, profiling habitat, plumage, nesting and food	http://ecx.images-amazon.com/images/I/51BiN79N2uL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	22
+73	2015-02-09 06:59:35.132258	2015-02-09 06:59:35.132258	Birds for Beginners (Learn Birds! Series Book 1)	http://ecx.images-amazon.com/images/I/51JIKnT5WfL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	0
+74	2015-02-09 06:59:35.157001	2015-02-09 06:59:35.157001	The Iridescence of Birds: A Book About Henri Matisse	http://ecx.images-amazon.com/images/I/51uJ5mY9s9L.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	17
+75	2015-02-09 06:59:35.180669	2015-02-09 06:59:35.180669	What the Robin Knows: How Birds Reveal the Secrets of the Natural World	http://ecx.images-amazon.com/images/I/41B0jUqnJkL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	14
+76	2015-02-09 06:59:35.205208	2015-02-09 06:59:35.205208	Birds, Nests & Eggs (Take Along Guides)	http://ecx.images-amazon.com/images/I/51F3%2B%2BswYyL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	7
+77	2015-02-09 06:59:35.229953	2015-02-09 06:59:35.229953	The Birds	http://ecx.images-amazon.com/images/I/41gdQIDI6XL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	0
+78	2015-02-09 06:59:35.254953	2015-02-09 06:59:35.254953	The Thing with Feathers: The Surprising Lives of Birds and What They Reveal About Being Human	http://ecx.images-amazon.com/images/I/414zj9YwoTL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	27
+79	2015-02-09 06:59:35.279986	2015-02-09 06:59:35.279986	To Kill a Mockingbird	http://ecx.images-amazon.com/images/I/51grMGCKivL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	8
+80	2015-02-09 06:59:35.304816	2015-02-09 06:59:35.304816	The Bird Market of Paris: A Memoir	http://ecx.images-amazon.com/images/I/51UICDa%2B9ML.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	26
+81	2015-02-09 06:59:37.337231	2015-02-09 06:59:37.337231	Bird	http://ecx.images-amazon.com/images/I/51GvumwZaHL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	60
+82	2015-02-09 06:59:37.408979	2015-02-09 06:59:37.408979	Birds of North America: A Guide To Field Identification (Golden Field Guide from St. Martin's Press)	http://ecx.images-amazon.com/images/I/51rrCwGNZDL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	15
+83	2015-02-09 06:59:37.434214	2015-02-09 06:59:37.434214	Birds of Paradise: Revealing the World's Most Extraordinary Birds	http://ecx.images-amazon.com/images/I/51UalXX3wVL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	50
+84	2015-02-09 06:59:37.466776	2015-02-09 06:59:37.466776	Bird (DK Eyewitness Books)	http://ecx.images-amazon.com/images/I/51rTts7A5jL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	16
+85	2015-02-09 06:59:37.49191	2015-02-09 06:59:37.49191	The Bedside Book of Birds: An Avian Miscellany	http://ecx.images-amazon.com/images/I/5102VYXW48L.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	37
+86	2015-02-09 06:59:37.518731	2015-02-09 06:59:37.518731	Audubon Songbirds & Other Backyard Birds Wall Calendar 2015	http://ecx.images-amazon.com/images/I/616c4BGRDaL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	13
+87	2015-02-09 06:59:37.548766	2015-02-09 06:59:37.548766	The Sibley Field Guide to Birds of Eastern North America	http://ecx.images-amazon.com/images/I/41MJWZ3XAHL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	19
+88	2015-02-09 06:59:37.575055	2015-02-09 06:59:37.575055	The Sibley Field Guide to Birds of Western North America	http://ecx.images-amazon.com/images/I/5180%2B9ShpkL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	19
+89	2015-02-09 06:59:37.599939	2015-02-09 06:59:37.599939	The Message of the Birds	http://ecx.images-amazon.com/images/I/51hhsU8l9%2BL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	16
+90	2015-02-09 06:59:37.624747	2015-02-09 06:59:37.624747	Peterson Field Guide to Birds of Eastern and Central North America, 6th Edition (Peterson Field Guides)	http://ecx.images-amazon.com/images/I/51lhY0l-HPL.jpg	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, explicabo, dicta reprehenderit iste nostrum sit voluptates facilis! Architecto ut consequatur eum doloremque nostrum. Dolore dolores suscipit perferendis fugit modi blanditiis?	24
+\.
+
+
+--
+-- TOC entry 2064 (class 0 OID 0)
+-- Dependencies: 173
+-- Name: products_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ntduy
+--
+
+SELECT pg_catalog.setval('products_id_seq', 90, true);
+
+
+--
+-- TOC entry 2033 (class 0 OID 27684)
+-- Dependencies: 170
+-- Data for Name: schema_migrations; Type: TABLE DATA; Schema: public; Owner: ntduy
+--
+
+COPY schema_migrations (version) FROM stdin;
+20150202133436
+20150203071745
+20150203075055
+20150203075659
+20150205062139
+20150205132230
+\.
+
+
+--
+-- TOC entry 2035 (class 0 OID 27693)
+-- Dependencies: 172
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: ntduy
+--
+
+COPY users (id, created_at, updated_at, name, email, address, phone, admin, password_digest, remember_digest, activation_digest, activated, activated_at, reset_digest, reset_sent_at) FROM stdin;
+1	2015-02-09 06:59:13.516465	2015-02-09 06:59:13.516465	Admin	admin@venshop.com	\N	0123456798	t	$2a$10$gPjJ9SuHzggZkldUNlS39.KyoQ4QiSEZrQ2jOFeIQPvUQp9lVklKm	\N	$2a$10$p8bFzBsDKr0h5rqhowIAIekddeQblX7csz/Kf9B/IVRUVgO4qHVzm	t	2015-02-09 06:59:13.425926	\N	\N
+2	2015-02-09 06:59:13.740521	2015-02-09 06:59:13.740521	testpage-1	example-1@venshop.com	\N	0123456798	f	$2a$10$lWBju9ZI3KUmsx9rVDnAeO9ei8g0pw1e6SKwER3neSTvp7doVqdf.	\N	$2a$10$Ic3Nr2OuYeTsu6yPdfO0MOMYEwrduEmiHHUMtjBzW3HXh2h7sfmsy	t	2015-02-09 06:59:13.665482	\N	\N
+3	2015-02-09 06:59:13.968372	2015-02-09 06:59:13.968372	testpage-2	example-2@venshop.com	\N	0123456798	f	$2a$10$3t5oqCiY6xyuUS1n1d74F.vlx750KNS0XptEHp2OZ9sC1Mn0vyIfy	\N	$2a$10$O66olIAGS5nu4yHOw7A0Tets8RzAtCWCEZa/QWMXhUCVAVlagY0la	t	2015-02-09 06:59:13.893706	\N	\N
+4	2015-02-09 06:59:14.189949	2015-02-09 06:59:14.189949	testpage-3	example-3@venshop.com	\N	0123456798	f	$2a$10$iaDSbVpWyhnFoBRNWB4k7.25hBAuuo3Yrk0Yw.qzUCclNQ6MLN3TO	\N	$2a$10$G7FWYllsPichp8P3i839lup9MmxSMznht2qvTzyQZMJc8s2Re90ny	t	2015-02-09 06:59:14.114888	\N	\N
+5	2015-02-09 06:59:14.440937	2015-02-09 06:59:14.440937	testpage-4	example-4@venshop.com	\N	0123456798	f	$2a$10$rsgN.M.BrAgfSGiOQGG.FefQQE7S2/nyD3Pf32r2Rqb7J.Y96HRuu	\N	$2a$10$x7/C58lb/JszZO7ToU8dyOV4PwuXOk9vJDBpE.HPw7ERpyJSvbsI6	t	2015-02-09 06:59:14.368585	\N	\N
+6	2015-02-09 06:59:14.663777	2015-02-09 06:59:14.663777	testpage-5	example-5@venshop.com	\N	0123456798	f	$2a$10$74Thd5QCYpLBuGrdp.QGrO8cSUL0QRYT07RJ83A78jmQYOCdo2.xa	\N	$2a$10$X/lA522K8PQrkYD.MBuXoOxv/ih1euGbKnJjjDxoMfWzzbHy6iecy	t	2015-02-09 06:59:14.589279	\N	\N
+7	2015-02-09 06:59:14.880814	2015-02-09 06:59:14.880814	testpage-6	example-6@venshop.com	\N	0123456798	f	$2a$10$0wqA8aXIIOeFnfbhr/Fc0uC9fY3Z2G6SGIOu4N29F7DeV/h/CMtkC	\N	$2a$10$kteUcQRCNRwaikdi7/OUfuG1eHF/JHi.h0AzjvQEN8XAg8GRthJ5m	t	2015-02-09 06:59:14.809083	\N	\N
+8	2015-02-09 06:59:15.105978	2015-02-09 06:59:15.105978	testpage-7	example-7@venshop.com	\N	0123456798	f	$2a$10$1bixZkqFlxRV3fB.WDKgV.lXctlgzYkpF3MUQRkSlusTw7N5D8dxq	\N	$2a$10$hbHkTXdjbsBdE92Ya4Bh6Oinaze1/iTmSfLSFh3qAAxbFNR/5o/gy	t	2015-02-09 06:59:15.030217	\N	\N
+9	2015-02-09 06:59:15.336119	2015-02-09 06:59:15.336119	testpage-8	example-8@venshop.com	\N	0123456798	f	$2a$10$hBRI.MhZ4/9pLCdXlLkPSO0VRmffxDr/vdrmGSn3UFSuRXSeNeuNu	\N	$2a$10$v10Lv5fUfh7rmcyQ5ixVrO0OPqw/0YAI.a3aXhcLZRpW2zASomJ/e	t	2015-02-09 06:59:15.258516	\N	\N
+10	2015-02-09 06:59:15.563542	2015-02-09 06:59:15.563542	testpage-9	example-9@venshop.com	\N	0123456798	f	$2a$10$KvSvTLUfqi0zwE4DXUkm4OckPqY5BIjlUGbavw2D5I9qypQ75oyi6	\N	$2a$10$Zv5eDutoend4nU6MIKNIE.wGk.zabhy1vrTG6YSq30sKAIfCvHMuy	t	2015-02-09 06:59:15.486646	\N	\N
+11	2015-02-09 06:59:15.792755	2015-02-09 06:59:15.792755	testpage-10	example-10@venshop.com	\N	0123456798	f	$2a$10$BC8EFjbUbTHm09IrtftIZ.UT4LM.EdNrPIorW/8cYiHX4zfctDMyG	\N	$2a$10$uuauw.lvt4MEKD/XeZkqM.Lj4zwstMYDPLpJcDzzrPxjB7e1ezG8K	t	2015-02-09 06:59:15.716153	\N	\N
+\.
+
+
+--
+-- TOC entry 2065 (class 0 OID 0)
+-- Dependencies: 171
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ntduy
+--
+
+SELECT pg_catalog.setval('users_id_seq', 11, true);
+
+
+--
+-- TOC entry 1923 (class 2606 OID 27753)
+-- Name: cart_details_pkey; Type: CONSTRAINT; Schema: public; Owner: ntduy; Tablespace: 
+--
+
+ALTER TABLE ONLY cart_details
+    ADD CONSTRAINT cart_details_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1921 (class 2606 OID 27745)
+-- Name: carts_pkey; Type: CONSTRAINT; Schema: public; Owner: ntduy; Tablespace: 
+--
+
+ALTER TABLE ONLY carts
+    ADD CONSTRAINT carts_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1917 (class 2606 OID 27726)
+-- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: ntduy; Tablespace: 
+--
+
+ALTER TABLE ONLY categories
+    ADD CONSTRAINT categories_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1919 (class 2606 OID 27734)
+-- Name: product_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: ntduy; Tablespace: 
+--
+
+ALTER TABLE ONLY product_categories
+    ADD CONSTRAINT product_categories_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1915 (class 2606 OID 27714)
+-- Name: products_pkey; Type: CONSTRAINT; Schema: public; Owner: ntduy; Tablespace: 
+--
+
+ALTER TABLE ONLY products
+    ADD CONSTRAINT products_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1912 (class 2606 OID 27703)
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: ntduy; Tablespace: 
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1924 (class 1259 OID 27754)
+-- Name: index_cart_details_on_cart_id; Type: INDEX; Schema: public; Owner: ntduy; Tablespace: 
+--
+
+CREATE INDEX index_cart_details_on_cart_id ON cart_details USING btree (cart_id);
+
+
+--
+-- TOC entry 1925 (class 1259 OID 27755)
+-- Name: index_cart_details_on_product_id; Type: INDEX; Schema: public; Owner: ntduy; Tablespace: 
+--
+
+CREATE INDEX index_cart_details_on_product_id ON cart_details USING btree (product_id);
+
+
+--
+-- TOC entry 1913 (class 1259 OID 27715)
+-- Name: index_products_on_name; Type: INDEX; Schema: public; Owner: ntduy; Tablespace: 
+--
+
+CREATE INDEX index_products_on_name ON products USING btree (name);
+
+
+--
+-- TOC entry 1910 (class 1259 OID 27690)
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: ntduy; Tablespace: 
+--
+
+CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+
+
+--
+-- TOC entry 2052 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2015-02-09 14:11:42 ICT
+
+--
+-- PostgreSQL database dump complete
+--
+
