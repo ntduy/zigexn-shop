@@ -42,7 +42,7 @@ class CartsController < ApplicationController
 				end
 			end
 			delete_cart_ss
-			@cart.send_checkout_email(current_user)
+			@cart.send_checkout_email
 			flash[:success] = "You will be recevie them soon! Check your mail to see cart's infomation"
 			redirect_to root_path
 		else

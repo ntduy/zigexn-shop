@@ -20,8 +20,7 @@ class UserMailer < ApplicationMailer
     mail to: user.email, subject: "Password reset"
   end
 
-  def checkout_cart(user, cart)
-    @user = user
+  def checkout_cart(cart)
     @cart = cart
     mail to: cart.email, subject: "Checking your cart"
   end

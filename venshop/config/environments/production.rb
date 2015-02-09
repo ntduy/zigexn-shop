@@ -7,8 +7,8 @@ Rails.application.configure do
     address:              'smtp.gmail.com',
     port:                 587,
     domain:               'herokuapp.com',
-    user_name:            '',
-    password:           '',
+    user_name:            'npd1111059@gmail.com',
+    password:           'Matkhau12',
     authentication:       'plain',
     enable_starttls_auto: true  }
   # Code is not reloaded between requests.
