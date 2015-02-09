@@ -7,10 +7,11 @@ class CartsController < ApplicationController
 
 	def new
 		@items = []
-		cart_ss[:items].each do |item|
-			@items << {product: Product.find(item[:product_id]),quantity: item[:quantity]}
+		if cart_ss[:items].count >0
+			cart_ss[:items].each do |item|
+				@items << {product: Product.find(item[:product_id]),quantity: item[:quantity]}
+			end
 		end
-
 		@cart = Cart.new
 		if logged_in?
 			@cart.user_id = current_user.id
@@ -33,14 +34,20 @@ class CartsController < ApplicationController
 		end
 		if @cart.save
 			cart_ss[:items].each do |item|
-				CartDetail.create!(cart_id: @cart.id, product_id: item[:product_id], quantity: item[:quantity])
+				if item[:quantity] < 0
+					flash[:danger] = "quantity < 0. Failed"
+					redirect_to new_cart_path
+				else
+					CartDetail.create!(cart_id: @cart.id, product_id: item[:product_id], quantity: item[:quantity])
+				end
 			end
 			delete_cart_ss
-			flash[:success] = "You will be recevie them soon!"
+			@cart.send_checkout_email(current_user)
+			flash[:success] = "You will be recevie them soon! Check your mail to see cart's infomation"
 			redirect_to root_path
 		else
-			flash[:danger] = "failed"
-			render 'new'
+			flash[:danger] = "failed. Please complete your bill's infomation"
+			redirect_to new_cart_path
 		end
 	end
 

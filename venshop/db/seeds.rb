@@ -10,25 +10,27 @@
 #     end
 
 
-# User.create!(name:  "Admin",
-# 	email: "admin@venshop.com",
-# 	password:              "123456",
-# 	password_confirmation: "123456",
-# 	admin: true,
-# 	activated: true,
-# 	activated_at: Time.zone.now)
+User.create!(name:  "Admin",
+	email: "admin@venshop.com",
+	password:              "123456",
+	password_confirmation: "123456",
+	phone: "0123456798",
+	admin: true,
+	activated: true,
+	activated_at: Time.zone.now)
 
-# 10.times do |n|
-# 	name  = "testpage-#{n+1}"
-# 	email = "example-#{n+1}@venshop.com"
-# 	password = "password"
-# 	User.create!(name:  name,
-# 		email: email,
-# 		password: password,
-# 		password_confirmation: password,
-# 		activated: true,
-# 		activated_at: Time.zone.now)
-# end
+10.times do |n|
+	name  = "testpage-#{n+1}"
+	email = "example-#{n+1}@venshop.com"
+	password = "password"
+	User.create!(name:  name,
+		email: email,
+		password: password,
+		password_confirmation: password,
+		phone: "0123456798",
+		activated: true,
+		activated_at: Time.zone.now)
+end
 
 request = Vacuum.new('US')
 request.configure(

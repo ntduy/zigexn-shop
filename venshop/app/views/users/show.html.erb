@@ -10,7 +10,7 @@
 		</section>
 	</aside>
 	<aside class="col-md-4">
-		<%if @carts.count >0%>
+		<%if !@carts.nil? && @carts.count > 0%>
 		<table>
 			<thead>
 				<tr>
@@ -22,8 +22,9 @@
 			</thead>
 			<tbody>
 
-				<%total=0%>
+				
 				<%@carts.each_with_index do |cart,index| %>
+				<%total=0%>
 				<tr>
 					<td><%=index+=1%></td>
 					
@@ -31,7 +32,7 @@
 					
 					<td><%=cart.created_at%></td>
 					<% cart.products.each do |product|
-						total+= product.price
+						total+= product.price * cart.cart_details.select{|cart_detail| (cart_detail.cart_id == cart.id && cart_detail.product_id == product.id)}[0].quantity
 						end %>
 						<td>$ <%= total %></td>
 					</tr>

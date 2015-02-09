@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
 	validates :email, presence: true, length: { maximum: 255 },
 	format: { with: VALID_EMAIL_REGEX }, uniqueness: {case_sensitive: false}
 
+	VALID_PHONE_REGEX = /[0]{1}[0-9]{9,10}/i
+	validates :phone, presence: true, format: { with: VALID_PHONE_REGEX }
+
 	has_secure_password
 	validates :password, length: { minimum: 6 }, allow_blank: true
 
@@ -42,7 +45,7 @@ class User < ActiveRecord::Base
 	end
 
 	def send_activation_email
-		 UserMailer.account_activation(self).deliver_now
+		UserMailer.account_activation(self).deliver_now
 	end
 
 	def create_reset_digest

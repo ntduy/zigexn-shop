@@ -1,0 +1,34 @@
+<h1>Venshop</h1>
+<p>Hi <%= @user.name %>,</p> <br><br><hr>
+<table style="width: 100%">
+	<thead>
+		<tr>
+			<th>STT</th>
+			<th>Image</th>
+			<th>Name</th>
+			<th>Quantity</th>
+			<th>Price</th>
+			<th>Total</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<%i=0%>
+		<%total =0 %>
+		<%@cart.products.each do |item| %>
+		<tr>
+			<td><%=i+=1%></td>
+			<td><%=image_tag(item.image_url,class:"img-responsive", style: "height: 100px")%></td>
+
+			<td><%="#{item.name}"%></td>
+			<td><%=quantity =  @cart.cart_details.select{|cart_detail| (cart_detail.cart_id == @cart.id && cart_detail.product_id == item.id)}[0].quantity%></td>
+			<td><%=item.price%></td>
+			<td><%=quantity*item.price%></td>
+			<%total+=quantity*item.price%>
+		</tr>
+		<%end%>
+		<tr>
+			<td colspan="6" style="text-align: right"><strong>Created at: <%=@cart.created_at%> | Total: <%=total%></strong></td>
+		</tr>
+	</tbody>
+</table>

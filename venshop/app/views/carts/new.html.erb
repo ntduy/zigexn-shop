@@ -1,4 +1,4 @@
-<%if @items.count >0 %>
+<%if @items.count > 0 %>
 <%= form_tag updatecart_path do %>
 <table style="width: 100%">
 	<thead>
@@ -21,7 +21,7 @@
 			<td><%=image_tag(item[:product].image_url,class:"img-responsive", style: "height: 100px")%></td>
 
 			<td><%= link_to "#{item[:product].name}",  product_path(item[:product]) %></td>
-			<td><%= text_field_tag "quantities[]", placeholder = "#{item[:quantity]}", style: "width: auto;text-align: center;"%></td>
+			<td><%= number_field_tag "quantities[]", placeholder = "#{item[:quantity]}", style: "width: auto;text-align: center;", min:  "1"%></td>
 			<td>$ <%=item[:product].price%></td>
 			<td>$ <%=item[:quantity]*item[:product].price%></td>
 			<%total+=item[:quantity]*item[:product].price%>

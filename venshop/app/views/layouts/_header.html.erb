@@ -16,7 +16,6 @@
 				<div class="col-sm-4 pull-right margintop10">
 					<nav>
 						<ul class="nav navbar-nav">
-							<li><%= link_to "Sign Up", signup_path %></li>
 							<% if logged_in? %>
 							<% if current_user.admin?%>
 							<li class="dropdown">
@@ -41,6 +40,7 @@
 								</ul>
 							</li>
 							<% else %>
+							<li><%= link_to "Sign Up", signup_path %></li>
 							<li><%= link_to "Log in", login_path %></li>
 							<% end %>
 						</ul>
@@ -48,13 +48,13 @@
 					<div class="cart margintop30 pull-right">
 						<div class="cart-w">
 							<div class="cart-info">
-							<%cart_ss%>
+								<%cart_ss%>
 								<span>
 									<%= link_to new_cart_path do %>
 									<i class="glyphicon glyphicon-shopping-cart"></i>
-										<strong>CART</strong>
-										<span><%= cart_ss[:items].count %></span>
-										<span>Products</span>
+									<strong>CART</strong>
+									<span><%= cart_ss[:items].count %></span>
+									<span>Products</span>
 									<% end %>
 								</span>
 							</div>

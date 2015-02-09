@@ -52,8 +52,13 @@ class ProductsController < ApplicationController
 	end
 
 	def destroy
-		unless ProductCategory.where(category_id: params[:id]).nil?
-			ProductCategory.where(category_id: params[:id]).each do |item| 
+		unless ProductCategory.where(product_id: params[:id]).nil?
+			ProductCategory.where(product_id: params[:id]).each do |item| 
+				item.destroy
+			end
+		end
+		unless CartDetail.where(product_id: params[:id]).nil?
+			CartDetail.where(product_id: params[:id]).each do |item| 
 				item.destroy
 			end
 		end
