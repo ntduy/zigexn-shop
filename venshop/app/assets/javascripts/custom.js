@@ -3,7 +3,7 @@ var ready = function () {
 	var origOffsetY = menu.offset().top;
 
 	function scroll() {
-		if ($(window).scrollTop() >= origOffsetY) {
+		if ($(window).scrollTop() > origOffsetY) {
 			$('.menu').addClass('navbar-fixed-top');
 		} else {
 			$('.menu').removeClass('navbar-fixed-top');

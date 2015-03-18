@@ -12,7 +12,7 @@ class Cart < ActiveRecord::Base
 	VALID_PHONE_REGEX = /[0]{1}[0-9]{9,10}/i
 	validates :phone, presence: true, format: { with: VALID_PHONE_REGEX }
 	
-	def send_checkout_email(user)
-		UserMailer.checkout_cart(user,self).deliver_now
+	def send_checkout_email
+		UserMailer.checkout_cart(self).deliver_now
 	end
 end

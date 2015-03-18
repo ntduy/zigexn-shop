@@ -11,19 +11,19 @@
 		<!-- Wrapper for slides -->
 		<div class="carousel-inner" role="listbox">
 			<div class="item active">
-				<%= image_tag("slider1.jpg")%>
+				<%= image_tag("slider1.jpg", class: "img-responsive")%>
 				<div class="carousel-caption">
 					NEW 2015 Colection
 				</div>
 			</div>
 			<div class="item">
-				<%= image_tag("slider2.jpg")%>
+				<%= image_tag("slider2.jpg", class: "img-responsive")%>
 				<div class="carousel-caption">
 					Create your style
 				</div>
 			</div>
 			<div class="item">
-				<%= image_tag("slider3.jpg")%>
+				<%= image_tag("slider3.jpg", class: "img-responsive")%>
 				<div class="carousel-caption">
 					New arrivals from top brands
 				</div>
@@ -59,7 +59,7 @@
 					<div class="product-lists">
 						<div class="row">
 							<%for i in 1..4 do%>
-							<div class="col-sm-6 col-lg-3 margintop40">
+							<div class="col-sm-7 col-lg-3 margintop40">
 								<% for j in (3*i-2)..(i*3) do  %>
 									<% if !@products[j-1].nil? %>
 										<%= render 'products/product', product: @products[j-1]%>
@@ -84,11 +84,10 @@
 	<!-- end product list -->
 	<div class="margintop40">
 		<div class="row">
-			<div class="col-lg-4 col-sm-6 col-xs-12">
+			<!-- <div class="col-lg-4 col-sm-6 col-xs-12">
 				<h3>FOLLOW US ON FACEBOOK</h3>
 				<iframe src="http://www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FFacebookDevelopers&amp;width&amp;height=258&amp;colorscheme=light&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=true" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:258px;" allowTransparency="true"></iframe>
-
-			</div>
+			</div> -->
 			<div class="col-lg-4 col-sm-4 col-xs-12">
 				<h3>ORIGINAL GIFTS</h3>
 				<div class="margintop10">

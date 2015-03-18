@@ -103,8 +103,9 @@ ol.carousel-indicators li.active {
 }
 
 table tr td {
-	 border: 1px solid black;
-	 text-align: center;
+	/*border: 1px solid black;*/
+	text-align: center;
+	background-color: white;
 }
 
 th{
@@ -130,11 +131,9 @@ th{
 
 .category {
 	font-size: 20px;
-	background-color: black;
+
 }
 
 .table-category {
 	width: 100%;
-	border: 1;
-	border-color: black;
 }

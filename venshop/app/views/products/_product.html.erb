@@ -11,7 +11,7 @@
 <%else%>
 <div class="product-item">
 	<%= link_to product_path(product) do %>
-	<%= image_tag(product.image_url,class:"img-responsive")%>
+	<%= image_tag(product.image_url, class: "img-responsive", width: "90%")%>
 	<div class="tittle text-center">
 		<h4><%= product.name %></h4>
 	</div>
